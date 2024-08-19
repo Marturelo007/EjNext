@@ -1,11 +1,11 @@
 "use client"
 
 //props
-export default function Checkbox(id, type, name, text, forInput) {    
+export default function Checkbox({name, text, onChange}) {    
     return (
         <div>
-                <input type={type} id={id} name={name} defaultChecked={false}></input>
-                <label for={forInput}>{text}</label>
+                <input type="checkbox" name={name} onChange={onChange}/>
+                <label>{text}</label>
         </div>
 
     );
