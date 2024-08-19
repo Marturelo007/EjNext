@@ -18,15 +18,25 @@ export default function Home() {
   }
 
   function funcionNombre(){
-    let nNombre=document.getElementById("ingresoNombre").value
-    setNombre(nNombre)
+
+    const nNombre=document.getElementById("ingresoNombre").value
+    setNombre(nNombre);
+    alternarBoton()
   }
   function funcionB(){
     console.log("hola chungo")
   }
   function alternarBoton(){
-    
+   let decrement = document.getElementById("decrement").checked
+   
+   if (decrement==false) {
+    setCuenta(contador += 1);
+   } else {
+    setCuenta(contador -= 1)
+   }
+
   }
+  
   useEffect(()=>{
     setCuenta(10)
   }, []
@@ -49,15 +59,15 @@ useEffect(()=>{
 };*/
   return (
     <main>
-      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi es el unico que trabaja"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionSumar}></ButtonClass>
-      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi es el unico que trabaja"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionB}></ButtonClass>
-      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi es el unico que trabaja"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionB}></ButtonClass>
-      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi es el unico que trabaja"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionB}></ButtonClass>
-      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi es el unico que trabaja"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionB}></ButtonClass>
-      <Checkbox function={alternarBoton}></Checkbox>
-      <h2> contador: { contador }</h2>
-      <h2> nombre: { nombre }</h2>
-      <input type="text" id="ingresoNombre" placeholder="pepeado"></input>
+      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionSumar}></ButtonClass>
+      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionB}></ButtonClass>
+      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionB}></ButtonClass>
+      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionB}></ButtonClass>
+      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionB}></ButtonClass>
+      <Checkbox type="checkbox" id="decrement" name="decrement" forInput="decrementar"  text="decrement?" function={alternarBoton}></Checkbox>
+      <h2> Contador: { contador }</h2>
+      <h2> Nombre: { nombre }</h2>
+      <input type="text" id="ingresoNombre" placeholder="ingrese nombre"></input>
       <Button onClick={funcionNombre}> modificar nombre</Button>
     </main>
 
