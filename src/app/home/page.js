@@ -7,65 +7,42 @@ import { useEffect } from "react";
 
 export default function Home() {
   let [contador, setCuenta] = useState(0)
-  let [nombre, setNombre] = useState("Anon")
+  let [nombre, setNombre] = useState("Enter your name")
   let [check, setCheck] = useState(false);
+  let [valorInput, setValorInput] = useState('');
 
-   function funcionNombre(){
-     const nNombre=document.getElementById("nombreInput").value
-     setNombre(nNombre);
-   }
-
-  function funcionB(){
-    console.log("hola chango")
+  function funcionNombre(event) {
+    setValorInput(event.target.value);
   }
 
-  function alternarBoton(event){
+  const manejarClick = () => {
+    setNombre(valorInput);
+  };
 
-    console.log (event)
-   if (event.target.checked==false) {
-    setCheck(false);
-   } else {
-    setCheck(true);
-   }
+  function incrementCounter() {
+
+    setCuenta(prevCount => check ? prevCount - 1 : prevCount + 1);
+  }
+
+
+  function alternarBoton(event) {
+    setCheck(event.target.checked);
   }
 
   useEffect(()=>{
-    setCuenta(10)
+    setCuenta(0)
     
   }, []
   )
 
-useEffect(()=>{
-  if (check) {
-    setCuenta(contador - 1);
-  } else {
-    setCuenta(contador + 1);
-  }
-}, [nombre]
-)
-
-  /*
-
   return (
     <main>
-      <h1>Hola amigo</h1>
-      
-      <Form title="title" btn1="logIn" btn2="signIn" btn1onClick="funcionA()" btn2onClick="funcionA()"> </Form>
-    </main>
-  );
-};*/
-  return (
-    <main>
-      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionB}></ButtonClass>
-      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionB}></ButtonClass>
-      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionB}></ButtonClass>
-      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionB}></ButtonClass>
-      <ButtonClass textTitle={"FaconApps"} textSubtitle={"Marchesi"} nameTeacher={"Nicola Facón"} expireDate={"2/10"} taskName={"Tp final"} onClick={funcionB}></ButtonClass>
-      <h2> Contador: { contador }</h2>
-      <h2> Nombre: { nombre }</h2>
-      <input type="text" id="nombreInput" placeholder="ingrese nombre"></input>
-      <Checkbox name="decrement" text="decrement?" onChange={alternarBoton}></Checkbox>
-      <Button onClick={funcionNombre}> modificar nombre</Button>
+      <h2>Counter: {contador}</h2>
+      <Button onClick={incrementCounter}>Increment Counter</Button>
+      <h2>Name: {nombre}</h2>
+      <input type="text" id="nombreInput" placeholder="Enter your name" value={valorInput} onChange={funcionNombre}/>
+      <Button onClick={manejarClick}>Modify name</Button>
+      <Checkbox name="decrement" text="Decrement" onChange={alternarBoton} />
     </main>
 
 
