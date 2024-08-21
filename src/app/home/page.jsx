@@ -4,7 +4,7 @@ import Button from "@/components/button";
 import Checkbox from "@/components/checkbox";
 import { useState } from "react";
 import { useEffect } from "react";
-
+import React from "react";
 export default function Home() {
   let [contador, setCuenta] = useState(0)
   let [nombre, setNombre] = useState("Enter your name")
