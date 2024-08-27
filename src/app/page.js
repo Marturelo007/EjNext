@@ -7,12 +7,13 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Navigation from "@/components/navigation";
 export default function Home() {
 
    const router = useRouter();
 
   function funcionA() {
-    console.log("HOLA")
+    console.log("hola q ace")
   }
 
 
@@ -23,16 +24,17 @@ export default function Home() {
 
 
         {/* <Button onClick={funcionA} >Sin link</Button> */}
-      <Link href="/home">
-          <Button > Back to menu</Button>
-      </Link>
+      <Navigation/>
       <input 
           type="text"
           id="nombreInput"
           placeholder="Enter your name"
           // value={valorInput}
           />
-        <Button>Send</Button>
+          <Link href="/home">
+          <Button onClick={funcionA}>log in</Button>
+          </Link>
+
     </main>
   );
 }

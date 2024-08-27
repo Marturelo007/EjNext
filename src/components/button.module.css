@@ -1,3 +1,18 @@
+/* From Uiverse.io by SteveBloX */ 
 .button {
-    
-}
+    width: auto;
+    padding: 10px;
+    height: 30%;
+    border: 3px solid #315cfd;
+    border-radius: 45px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: white;
+    font-weight: 550;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .button:hover {
+    background: #315cfd;
+    color: white;
+  }
