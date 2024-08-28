@@ -1,5 +1,7 @@
 /* From Uiverse.io by SteveBloX */ 
 .button {
+  margin: 5%;
+  margin-top: 10%;  
     width: auto;
     padding: 10px;
     height: 30%;
@@ -9,6 +11,7 @@
     cursor: pointer;
     background: white;
     font-weight: 550;
+    color: black;
     font-family: 'Montserrat', sans-serif;
   }
   

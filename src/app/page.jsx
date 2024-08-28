@@ -1,4 +1,5 @@
 "use client"
+import InputGroup from "@/components/input";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Button from "@/components/button";
@@ -25,15 +26,14 @@ export default function Home() {
 
         {/* <Button onClick={funcionA} >Sin link</Button> */}
       <Navigation/>
-      <input 
-          type="text"
-          id="nombreInput"
-          placeholder="Enter your name"
-          // value={valorInput}
-          />
+          <div>
+          {/* <input type="text" id="nombreInput" placeholder="Enter your name"/> */}
+          <InputGroup/>
           <Link href="/home">
           <Button onClick={funcionA}>log in</Button>
           </Link>
+          </div>
+
 
     </main>
   );

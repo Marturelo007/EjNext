@@ -5,8 +5,12 @@ import Link from "next/link";
 //props
 function Navigation() {
     
+    const navigationStyle = {
+        margin: '5%',
+        marginBottom: '10%',
+    }
     return (
-        <ul>
+        <ul style={navigationStyle}>
             <li>
                 <Link href="/home">Home</Link>
             </li>

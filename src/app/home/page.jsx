@@ -1,12 +1,12 @@
 "use client"
-import ButtonClass from "@/components/class";
+import Users from "@/components/user";
 import Button from "@/components/button";
 import Checkbox from "@/components/checkbox";
 import { useState } from "react";
 import { useEffect } from "react";
 import Link from "next/link"; 
 import { useRouter } from "next/navigation";
-
+import Navigation from "@/components/navigation";
 export default function Home() {
   let [contador, setCuenta] = useState(0)
   let [nombre, setNombre] = useState("Enter your name")
@@ -50,22 +50,8 @@ export default function Home() {
 
   return (
     <main>
-      <h2>Counter: {contador}</h2>
-      <Button onClick={incrementCounter}>Increment Counter</Button>
-      <h2>Name: {nombre}</h2>
-      <input
-        type="text"
-        id="nombreInput"
-        placeholder="Enter your name"
-        value={valorInput}
-        onChange={funcionNombre}
-      />
-      <Button onClick={manejarClick}>Modify name</Button>
-      <Checkbox
-        name="decrement"
-        text="Decrement"
-        onChange={alternarBoton}
-      />
+      {/* <Navigation/> */}
+      <Users/>
     </main>
   );
 }

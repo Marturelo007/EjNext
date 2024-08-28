@@ -1,5 +1,5 @@
 "use client"
-import styles from './button.module.css';
+import styles from './checkbox.module.css';
 
 //props
 export default function Checkbox({name, text, onChange}) {    
