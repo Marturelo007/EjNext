@@ -1,23 +1,23 @@
 "use client"
 import React from "react";
 import Link from "next/link";
-
+import Image from "next/image";
 //props
 function Navigation() {
     
-    const navigationStyle = {
-        margin: '5%',
-        marginBottom: '10%',
-    }
+    const navigationStyle = 'green';
     return (
-        <ul style={navigationStyle}>
-            <li>
-                <Link href="/home">Home</Link>
-            </li>
-            <li>
-                <Link href="/">3000</Link>
-            </li>
-        </ul>
+        <nav class="navbar bg-body-tertiary" style={{backgroundColor:navigationStyle}}>
+          <div class="container-fluid">
+            <Link href="/">
+            <Image src="/images/WhatsApp.svg.png" alt="User Profile Icon" width={50} height={50} />WhatsApp
+            </Link>
+            
+            <Link href="users">
+            Users
+            </Link>
+          </div>
+      </nav>
     )
   }
   

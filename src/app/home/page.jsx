@@ -1,27 +1,26 @@
-"use client"
+"use client";
 import Users from "@/components/user";
 import Button from "@/components/button";
 import Checkbox from "@/components/checkbox";
-import { useState } from "react";
-import { useEffect } from "react";
-import Link from "next/link"; 
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Navigation from "@/components/navigation";
+import Image from "next/image";
+
 export default function Home() {
-  let [contador, setCuenta] = useState(0)
-  let [nombre, setNombre] = useState("Enter your name")
+  let [contador, setCuenta] = useState(0);
+  let [nombre, setNombre] = useState("Enter your name");
   let [check, setCheck] = useState(false);
   let [valorInput, setValorInput] = useState('');
 
-
-  //para usar router
+  // For router
   const router = useRouter();
 
   function funcionA() {
-    //Suma al historial
-    router.push("/ranking")
-    // Remplaza el historial
-    router.replace("/ranking")
+    // Add to history
+    router.push("/ranking");
+    // Replace history
+    router.replace("/ranking");
   }
 
   function funcionNombre(event) {
@@ -33,25 +32,41 @@ export default function Home() {
   };
 
   function incrementCounter() {
-
     setCuenta(prevCount => check ? prevCount - 1 : prevCount + 1);
   }
-
 
   function alternarBoton(event) {
     setCheck(event.target.checked);
   }
 
-  useEffect(()=>{
-    setCuenta(0)
-    
-  }, []
-  )
+  useEffect(() => {
+    setCuenta(0);
+  }, []);
 
+  // Preload the image
   return (
-    <main>
-      {/* <Navigation/> */}
-      <Users/>
-    </main>
+    <>
+      <Image
+        src="/whatsupback.jpg"
+        alt="Background Image"
+        width={0} // width and height can be set to 0 to avoid rendering
+        height={0}
+        style={{ display: 'none' }} // Hide the image
+        priority
+      />
+      <main
+        style={{
+          backgroundImage: `url('/whatsupback.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          height: '100vh',
+          width: '100vw',
+        }}
+      >
+        <Navigation />
+        <Users />
+      </main>
+    </>
   );
 }
