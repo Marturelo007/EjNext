@@ -13,9 +13,6 @@ export default function Home() {
 
    const router = useRouter();
 
-  function funcionA() {
-    console.log("hola q ace")
-  }
 
 
 
@@ -30,7 +27,7 @@ export default function Home() {
           {/* <input type="text" id="nombreInput" placeholder="Enter your name"/> */}
           <InputGroup/>
           <Link href="/home">
-          <Button onClick={funcionA}>log in</Button>
+          <Button>log in</Button>
           </Link>
           </div>
 

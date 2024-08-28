@@ -1,5 +1,5 @@
 "use client";
-import Users from "@/components/user";
+import Users from "@/components/Users";
 import Button from "@/components/button";
 import Checkbox from "@/components/checkbox";
 import { useState, useEffect } from "react";
@@ -57,7 +57,7 @@ export default function Home() {
         }}
       >
         <Navigation />
-        <Users />
+        <Users user={users}/>
       </main>
     </>
   );
