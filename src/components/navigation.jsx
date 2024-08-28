@@ -7,14 +7,11 @@ function Navigation() {
     
     const navigationStyle = 'green';
     return (
-        <nav class="navbar bg-body-tertiary" style={{backgroundColor:navigationStyle}}>
-          <div class="container-fluid">
+        <nav className="navbar bg-body-tertiary" style={{backgroundColor:navigationStyle}}>
+          <div className="container-fluid">
+            <Image src="/WhatsApp.svg.png" alt="User Profile Icon" width={50} height={50} />
             <Link href="/">
-            <Image src="/images/WhatsApp.svg.png" alt="User Profile Icon" width={50} height={50} />WhatsApp
-            </Link>
-            
-            <Link href="users">
-            Users
+            <Image src="/signOut.png" alt="User Profile Icon" width={50} height={50} /> Sign out
             </Link>
           </div>
       </nav>

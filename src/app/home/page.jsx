@@ -46,14 +46,6 @@ export default function Home() {
   // Preload the image
   return (
     <>
-      <Image
-        src="/whatsupback.jpg"
-        alt="Background Image"
-        width={0} // width and height can be set to 0 to avoid rendering
-        height={0}
-        style={{ display: 'none' }} // Hide the image
-        priority
-      />
       <main
         style={{
           backgroundImage: `url('/whatsupback.jpg')`,
