@@ -1,64 +1,22 @@
-"use client";
-import Users from "@/components/Users";
-import Button from "@/components/button";
-import Checkbox from "@/components/checkbox";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Navigation from "@/components/navigation";
-import Image from "next/image";
-
-export default function Home() {
-  let [contador, setCuenta] = useState(0);
-  let [nombre, setNombre] = useState("Enter your name");
-  let [check, setCheck] = useState(false);
-  let [valorInput, setValorInput] = useState('');
-
-  // For router
-  const router = useRouter();
-
-  function funcionA() {
-    // Add to history
-    router.push("/ranking");
-    // Replace history
-    router.replace("/ranking");
-  }
-
-  function funcionNombre(event) {
-    setValorInput(event.target.value);
-  }
-
-  const manejarClick = () => {
-    setNombre(valorInput);
-  };
-
-  function incrementCounter() {
-    setCuenta(prevCount => check ? prevCount - 1 : prevCount + 1);
-  }
-
-  function alternarBoton(event) {
-    setCheck(event.target.checked);
-  }
-
-  useEffect(() => {
-    setCuenta(0);
-  }, []);
-
-  // Preload the image
-  return (
-    <>
-      <main
-        style={{
-          backgroundImage: `url('/whatsupback.jpg')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          height: '100vh',
-          width: '100vw',
-        }}
-      >
-        <Navigation />
-        <Users user={users}/>
-      </main>
-    </>
-  );
+async function getUser(id) {
+  const res = await fetch(`https://reqres.in/api/users/${id}`)
+  const data = await res.json()
+  return data.data
 }
+
+async function UserPage({params}) {
+  const user = await getUser(params.id)
+
+  return (
+    <div>
+      <h1>User Details</h1>
+      <div>
+      <img src={user.avatar} alt={user.email    } />
+      </div>
+      <h3> {user.id} {user.first_name} {user.last_name}</h3>
+      <p>{user.email}</p>
+    </div>
+  )
+}
+
+export default UserPage;

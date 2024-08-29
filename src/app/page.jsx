@@ -12,6 +12,7 @@ import Navigation from "@/components/navigation";
 export default function Home() {
 
    const router = useRouter();
+   const logIn = "blue"
 
 
 
@@ -20,13 +21,11 @@ export default function Home() {
   return (
     <main className={styles.main}>
 
-
-        {/* <Button onClick={funcionA} >Sin link</Button> */}
-      <Navigation/>
+<h3 style={{color: logIn}}>User log in</h3>
           <div>
           {/* <input type="text" id="nombreInput" placeholder="Enter your name"/> */}
           <InputGroup/>
-          <Link href="/home">
+          <Link href="/usersD">
           <Button>log in</Button>
           </Link>
           </div>
