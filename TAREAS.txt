@@ -1,0 +1,6 @@
+1 Armar base de datos , Usuario ( id , nombre ) 
+Mensajes (tiempo , usuario receptor, usuario emisor, texto)
+2 acomodar las paginas a una sola 
+3 boton sent guarda en base de datos el mensaje , una vez confirmados mostras el mensaje .
+4 acomodar el login que esta horrible 
+5 ponerle colores (es una tristeza)
