@@ -21,15 +21,16 @@ export default function Home() {
   return (
     <main className={styles.main}>
 
-<h3 style={{color: logIn}}>User log in</h3>
-          <div>
-          {/* <input type="text" id="nombreInput" placeholder="Enter your name"/> */}
-          <InputGroup/>
-          <Link href="/usersD">
-          <Button>log in</Button>
-          </Link>
-          </div>
-
+<div className={styles.formContainer}>
+  <h3 style={{color: logIn}}>User log in</h3>
+            <div>
+            {/* <input type="text" id="nombreInput" placeholder="Enter your name"/> */}
+            <InputGroup/>
+            <Link href="/usersD">
+            <Button>log in</Button>
+            </Link>
+            </div>
+</div>
 
     </main>
   );
