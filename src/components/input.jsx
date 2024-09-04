@@ -49,7 +49,7 @@ const inputStyle = (focused, valid) => ({
   fontSize: '1rem',
   color: '#f5f5f5',
   transition: 'border 150ms cubic-bezier(0.4,0,0.2,1)',
-  borderColor: focused || valid ? '#1a73e8' : '#9e9e9e',
+  borderColor: focused || valid ? '#40c9ff' : '#9e9e9e',
   outline: 'none',
   
 });

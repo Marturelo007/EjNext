@@ -12,7 +12,7 @@ import Navigation from "@/components/navigation";
 export default function Home() {
 
    const router = useRouter();
-   const logIn = "blue"
+   const logIn = "#40c9ff"
 
 
 
@@ -27,7 +27,7 @@ export default function Home() {
             {/* <input type="text" id="nombreInput" placeholder="Enter your name"/> */}
             <InputGroup/>
             <Link href="/usersD">
-            <Button>log in</Button>
+            <Button></Button>
             </Link>
             </div>
 </div>
