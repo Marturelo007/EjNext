@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import pepe from "/src/app/pepe.css";
+import pepe from "/src/app/usersD/pepe.css";
 const i = {
   borderRadius: "50%",
    marginRight: "5%",
@@ -148,7 +148,7 @@ function Users() {
     
           </div>
     
-          <div className="col-md-6 col-lg-7 col-xl-7">
+          <div className="col-md-6 col-lg-7 col-xl-7" style={pepe.chats}>
     
             <ul className="list-unstyled text-black">
               <li className="d-flex justify-content-between mb-4">
