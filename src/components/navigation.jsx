@@ -22,7 +22,7 @@ function Navigation() {
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav ms-auto">
         <li className="nav-item">
-          <Link className="nav-link active" aria-current="page" href="/">
+          <Link className="nav-link active" aria-current="page" href="/usersD">
           <Image src="/user-icon.png" width={50} height={50} style={userIcon}/>
           Users
           </Link>

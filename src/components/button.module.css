@@ -31,13 +31,11 @@
 .card {
   text-decoration: none;
   margin-top: 5%;
-  width: fit-content;
-  height: fit-content;
+  width: 15%;
   background-color: rgba(49, 49, 49, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px 15px;
   gap: 15px;
   overflow: hidden;
   border-radius: 27px;

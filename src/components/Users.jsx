@@ -31,7 +31,7 @@ function Users() {
                   <li className="p-2 border-bottom" style={card}>
                     <a href="#!" className="d-flex justify-content-between link-light">
                       <div className="d-flex flex-row">
-                      <img src="/user-icon.png" alt="avatar"
+                      <img src="/user-icon.png" alt="avatar1"
                           className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
                         <div className="pt-1">
                           <p className="text-black fw-bold mb-0">John Doe</p>
@@ -148,7 +148,7 @@ function Users() {
     
           </div>
     
-          <div className="col-md-6 col-lg-7 col-xl-7" style={pepe.chats}>
+          <div className="col-md-6 col-lg-7 col-xl-7" style={{ height: '100vh', overflowY: 'auto' }}>
     
             <ul className="list-unstyled text-black">
               <li className="d-flex justify-content-between mb-4">
