@@ -1,5 +1,5 @@
 "use client"
-import pepe from "/src/app/usersD/pepe.css";
+import pepe from "/src/app/usersDetails/pepe.css";
 import { useEffect } from "react";
 import Navigation from "@/components/navigation";
 import Users from "@/components/Users"
