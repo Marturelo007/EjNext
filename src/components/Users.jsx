@@ -1,226 +1,215 @@
 "use client";
 import { useRouter } from "next/navigation";
 import pepe from "/src/app/usersD/pepe.css";
+import Image from "next/image";
 const i = {
   borderRadius: "50%",
    marginRight: "5%",
 }
 
-function Users() {
+const Users = () => {
+  return (
+    <section style={{ backgroundColor: '#CDC4F9' }}>
+      <div style={{ padding: '3rem' }}>
 
-  const card = {
-    borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
-  }
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <div style={{ flex: 1 }}>
 
-    const router = useRouter()
+            <div style={{ borderRadius: '15px', border: '1px solid #ddd', backgroundColor: '#fff' }}>
+              <div style={{ padding: '1rem' }}>
 
-    return(
-      <section style={pepe.gradientCustom}>
-      <div className="container py-5">
-    
-        <div className="row">
-    
-          <div className="col-md-6 col-lg-5 col-xl-5 mb-4 mb-md-0">
-    
-            <h5 className="font-weight-bold mb-3 text-center text-white">Member</h5>
-    
-            <div className="card mask-custom">
-              <div className="card-body">
-    
-                <ul className="list-unstyled mb-0">
-                  <li className="p-2 border-bottom" style={card}>
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                      <img src="/user-icon.png" alt="avatar1"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-                        <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">John Doe</p>
-                          <p className="small text-black">Hello, Are you there?</p>
-                        </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">Just now</p>
-                        <span className="badge bg-danger float-end">1</span>
-                      </div>
-                    </a>
-                  </li>
-                  <li className="p-2 border-bottom" style={card}>
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                        <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-                        <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">Danny Smith</p>
-                          <p className="small text-black">Lorem ipsum dolor sit.</p>
-                        </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">5 mins ago</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li className="p-2 border-bottom" style={card}>
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                      <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-                        <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">Alex Steward</p>
-                          <p className="small text-black">Lorem ipsum dolor sit.</p>
-                        </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">Yesterday</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li className="p-2 border-bottom" style={card}>
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                      <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-                        <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">Ashley Olsen</p>
-                          <p className="small text-black">Lorem ipsum dolor sit.</p>
-                        </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">Yesterday</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li className="p-2 border-bottom" style={card}>
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                      <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-                        <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">Kate Moss</p>
-                          <p className="small text-black">Lorem ipsum dolor sit.</p>
-                        </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">Yesterday</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li className="p-2 border-bottom" style={card}>
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                      <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-                        <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">Lara Croft</p>
-                          <p className="small text-black">Lorem ipsum dolor sit.</p>
-                        </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">Yesterday</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li className="p-2">
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                      <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-                        <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">Brad Pitt</p>
-                          <p className="small text-black">Lorem ipsum dolor sit.</p>
-                        </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">5 mins ago</p>
-                        <span className="text-black float-end"><i className="fas fa-check" aria-hidden="true"></i></span>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-    
+                <div style={{ marginBottom: '1rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', borderRadius: '0.25rem', border: '1px solid #ccc' }}>
+                    <input type="search" style={{ flex: 1, borderRadius: '0.25rem', border: 'none', padding: '0.5rem' }} placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <span id="search-addon" style={{ padding: '0rem', backgroundColor: '#f1f1f1', borderRadius: '0 0.25rem 0.25rem 0' }}>
+                      <i className="fas fa-search"></i>
+                    </span>
+                  </div>
+
+                  <div style={{ position: 'relative', height: '400px', overflowY: 'auto' }}>
+                    <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
+                      <li style={{ padding: '0.5rem', borderBottom: '1px solid #ddd' }}>
+                        <a href="#!" style={{ display: 'flex', justifyContent: 'space-between', textDecoration: 'none', color: 'inherit' }}>
+                          <div style={{ display: 'flex', flexDirection: 'row' }}>
+                            <div>
+                              <Image src="/user-icon.png" alt="avatar" width={60} height={60} />
+                              <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#28a745' }}></span>
+                            </div>
+                            <div style={{ paddingTop: '0.25rem', marginLeft: '0.75rem' }}>
+                              <p style={{ fontWeight: 'bold', margin: 0 }}>Marie Horwitz</p>
+                              <p style={{ fontSize: '0.875rem', color: '#6c757d', margin: 0 }}>Hello, Are you there?</p>
+                            </div>
+                          </div>
+                          <div style={{ paddingTop: '0.25rem', textAlign: 'right' }}>
+                            <p style={{ fontSize: '0.875rem', color: '#6c757d', margin: 0 }}>Just now</p>
+                            <span style={{ display: 'inline-block', padding: '0.25rem 0.5rem', borderRadius: '1rem', backgroundColor: '#dc3545', color: '#fff' }}>3</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li style={{ padding: '0.5rem', borderBottom: '1px solid #ddd' }}>
+                        <a href="#!" style={{ display: 'flex', justifyContent: 'space-between', textDecoration: 'none', color: 'inherit' }}>
+                          <div style={{ display: 'flex', flexDirection: 'row' }}>
+                            <div>
+                              <Image src="/user-icon.png" alt="avatar" width={60} height={60} />
+                              <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#ffc107' }}></span>
+                            </div>
+                            <div style={{ paddingTop: '0.25rem', marginLeft: '0.75rem' }}>
+                              <p style={{ fontWeight: 'bold', margin: 0 }}>Alexa Chung</p>
+                              <p style={{ fontSize: '0.875rem', color: '#6c757d', margin: 0 }}>Lorem ipsum dolor sit.</p>
+                            </div>
+                          </div>
+                          <div style={{ paddingTop: '0.25rem', textAlign: 'right' }}>
+                            <p style={{ fontSize: '0.875rem', color: '#6c757d', margin: 0 }}>5 mins ago</p>
+                            <span style={{ display: 'inline-block', padding: '0.25rem 0.5rem', borderRadius: '1rem', backgroundColor: '#dc3545', color: '#fff' }}>2</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li style={{ padding: '0.5rem', borderBottom: '1px solid #ddd' }}>
+                        <a href="#!" style={{ display: 'flex', justifyContent: 'space-between', textDecoration: 'none', color: 'inherit' }}>
+                          <div style={{ display: 'flex', flexDirection: 'row' }}>
+                            <div>
+                              <Image src="/user-icon.png" alt="avatar" width={60} height={60} />
+                              <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#28a745' }}></span>
+                            </div>
+                            <div style={{ paddingTop: '0.25rem', marginLeft: '0.75rem' }}>
+                              <p style={{ fontWeight: 'bold', margin: 0 }}>Danny McChain</p>
+                              <p style={{ fontSize: '0.875rem', color: '#6c757d', margin: 0 }}>Lorem ipsum dolor sit.</p>
+                            </div>
+                          </div>
+                          <div style={{ paddingTop: '0.25rem', textAlign: 'right' }}>
+                            <p style={{ fontSize: '0.875rem', color: '#6c757d', margin: 0 }}>Yesterday</p>
+                          </div>
+                        </a>
+                      </li>
+                      <li style={{ padding: '0.5rem', borderBottom: '1px solid #ddd' }}>
+                        <a href="#!" style={{ display: 'flex', justifyContent: 'space-between', textDecoration: 'none', color: 'inherit' }}>
+                          <div style={{ display: 'flex', flexDirection: 'row' }}>
+                            <div>
+                              <Image src="/user-icon.png" alt="avatar" width={60} height={60} />
+                              <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#dc3545' }}></span>
+                            </div>
+                            <div style={{ paddingTop: '0.25rem', marginLeft: '0.75rem' }}>
+                              <p style={{ fontWeight: 'bold', margin: 0 }}>Ashley Olsen</p>
+                              <p style={{ fontSize: '0.875rem', color: '#6c757d', margin: 0 }}>Lorem ipsum dolor sit.</p>
+                            </div>
+                          </div>
+                          <div style={{ paddingTop: '0.25rem', textAlign: 'right' }}>
+                            <p style={{ fontSize: '0.875rem', color: '#6c757d', margin: 0 }}>Yesterday</p>
+                          </div>
+                        </a>
+                      </li>
+                      <li style={{ padding: '0.5rem' }}>
+                        <a href="#!" style={{ display: 'flex', justifyContent: 'space-between', textDecoration: 'none', color: 'inherit' }}>
+                          <div style={{ display: 'flex', flexDirection: 'row' }}>
+                            <div>
+                              <Image src="/user-icon.png" alt="avatar" width={60} height={60} />
+                              <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#ffc107' }}></span>
+                            </div>
+                            <div style={{ paddingTop: '0.25rem', marginLeft: '0.75rem' }}>
+                              <p style={{ fontWeight: 'bold', margin: 0 }}>Kate Moss</p>
+                              <p style={{ fontSize: '0.875rem', color: '#6c757d', margin: 0 }}>Lorem ipsum dolor sit.</p>
+                            </div>
+                          </div>
+                          <div style={{ paddingTop: '0.25rem', textAlign: 'right' }}>
+                            <p style={{ fontSize: '0.875rem', color: '#6c757d', margin: 0 }}>Yesterday</p>
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+
               </div>
+
             </div>
-    
+
           </div>
-    
-          <div className="col-md-6 col-lg-7 col-xl-7" style={{ height: '100vh', overflowY: 'auto' }}>
-    
-            <ul className="list-unstyled text-black">
-              <li className="d-flex justify-content-between mb-4">
-              <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-                <div className="card mask-custom">
-                  <div className="card-header d-flex justify-content-between p-3"
-                    style={card}>
-                    <p className="text-black fw-bold mb-0">Brad Pitt</p>
-                    <p className="text-dark small mb-0"><i className="far fa-clock"></i> 12 mins ago</p>
-                  </div>
-                  <div className="card-body">
-                    <p className="mb-0">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.
-                    </p>
-                  </div>
+
+          <div style={{ flex: 2, paddingLeft: '1rem' }}>
+
+            <div style={{ paddingTop: '1rem', paddingRight: '1rem', position: 'relative', height: '400px', overflowY: 'auto' }}>
+
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <Image src="/user-icon.png" alt="avatar 1" width={45} height={45} />
+                <div style={{ marginLeft: '0.75rem' }}>
+                  <p style={{ fontSize: '0.875rem', padding: '0.5rem', borderRadius: '0.25rem', backgroundColor: '#e9ecef' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  <p style={{ fontSize: '0.875rem', margin: '0.25rem 0', textAlign: 'right', color: '#6c757d' }}>12:00 PM | Aug 13</p>
                 </div>
-              </li>
-              <li className="d-flex justify-content-between mb-4">
-                <div className="card mask-custom w-100">
-                  <div className="card-header d-flex justify-content-between p-3"
-                    style={card}>
-                    <p className="text-black fw-bold mb-0">Lara Croft</p>
-                    <p className="text-dark small mb-0"><i className="far fa-clock"></i> 13 mins ago</p>
-                  </div>
-                  <div className="card-body">
-                    <p className="mb-0">
-                      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                      laudantium.
-                    </p>
-                  </div>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                <div style={{ marginLeft: '0.75rem' }}>
+                  <p style={{ fontSize: '0.875rem', padding: '0.5rem', borderRadius: '0.25rem', backgroundColor: '#007bff', color: '#fff' }}>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <p style={{ fontSize: '0.875rem', margin: '0.25rem 0', color: '#6c757d' }}>12:00 PM | Aug 13</p>
                 </div>
-                <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-              </li>
-              <li className="d-flex justify-content-between mb-4">
-              <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-                <div className="card mask-custom">
-                  <div className="card-header d-flex justify-content-between p-3"
-                    style={card}>
-                    <p className="text-black fw-bold mb-0">Brad Pitt</p>
-                    <p className="text-dark small mb-0"><i className="far fa-clock"></i> 10 mins ago</p>
-                  </div>
-                  <div className="card-body">
-                    <p className="mb-0">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.
-                    </p>
-                  </div>
+                <Image src="/user-icon.png" alt="avatar 1" width={45} height={45} />
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <Image src="/user-icon.png" alt="avatar 1" width={45} height={45} />
+                <div style={{ marginLeft: '0.75rem' }}>
+                  <p style={{ fontSize: '0.875rem', padding: '0.5rem', borderRadius: '0.25rem', backgroundColor: '#e9ecef' }}>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                  <p style={{ fontSize: '0.875rem', margin: '0.25rem 0', textAlign: 'right', color: '#6c757d' }}>12:00 PM | Aug 13</p>
                 </div>
-              </li>
-              <li className="mb-3">
-                <div data-mdb-input-init className="form-outline form-white">
-                  <textarea className="form-control" id="textAreaExample3" rows="4"></textarea>
-                  <label className="form-label" forhtml="textAreaExample3">Message</label>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                <div style={{ marginLeft: '0.75rem' }}>
+                  <p style={{ fontSize: '0.875rem', padding: '0.5rem', borderRadius: '0.25rem', backgroundColor: '#007bff', color: '#fff' }}>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  <p style={{ fontSize: '0.875rem', margin: '0.25rem 0', color: '#6c757d' }}>12:00 PM | Aug 13</p>
                 </div>
-              </li>
-              <button  type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-light btn-lg btn-rounded float-end">Send</button>
-            </ul>
-    
+                <Image src="/user-icon.png" alt="avatar 1" width={45} height={45} />
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <Image src="/user-icon.png" alt="avatar 1" width={45} height={45} />
+                <div style={{ marginLeft: '0.75rem' }}>
+                  <p style={{ fontSize: '0.875rem', padding: '0.5rem', borderRadius: '0.25rem', backgroundColor: '#e9ecef' }}>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                  <p style={{ fontSize: '0.875rem', margin: '0.25rem 0', textAlign: 'right', color: '#6c757d' }}>12:00 PM | Aug 13</p>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                <div style={{ marginLeft: '0.75rem' }}>
+                  <p style={{ fontSize: '0.875rem', padding: '0.5rem', borderRadius: '0.25rem', backgroundColor: '#007bff', color: '#fff' }}>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                  <p style={{ fontSize: '0.875rem', margin: '0.25rem 0', color: '#6c757d' }}>12:00 PM | Aug 13</p>
+                </div>
+                <Image src="/user-icon.png" alt="avatar 1" width={45} height={45} />
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <Image src="/user-icon.png" alt="avatar 1" width={45} height={45} />
+                <div style={{ marginLeft: '0.75rem' }}>
+                  <p style={{ fontSize: '0.875rem', padding: '0.5rem', borderRadius: '0.25rem', backgroundColor: '#e9ecef' }}>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                  <p style={{ fontSize: '0.875rem', margin: '0.25rem 0', textAlign: 'right', color: '#6c757d' }}>12:00 PM | Aug 13</p>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                <div style={{ marginLeft: '0.75rem' }}>
+                  <p style={{ fontSize: '0.875rem', padding: '0.5rem', borderRadius: '0.25rem', backgroundColor: '#007bff', color: '#fff' }}>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
+                  <p style={{ fontSize: '0.875rem', margin: '0.25rem 0', color: '#6c757d' }}>12:00 PM | Aug 13</p>
+                </div>
+                <Image src="/user-icon.png" alt="avatar 1" width={45} height={45} />
+              </div>
+
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', padding: '1rem', borderTop: '1px solid #ddd' }}>
+              <Image src="/user-icon.png" alt="avatar 3" width={40} height={40} />
+              <input type="text" style={{ flex: 1, marginLeft: '0.75rem', borderRadius: '0.25rem', border: '1px solid #ccc', padding: '0.5rem' }} placeholder="Type message" />
+              <a href="#!" style={{ marginLeft: '0.5rem', color: '#6c757d' }}><i className="fas fa-paperclip"></i></a>
+              <a href="#!" style={{ marginLeft: '0.5rem', color: '#6c757d' }}><i className="fas fa-smile"></i></a>
+              <a href="#!" style={{ marginLeft: '0.5rem' }}><i className="fas fa-paper-plane"></i></a>
+            </div>
+
           </div>
-    
         </div>
-    
+
       </div>
     </section>
-    );
-}
+  );
+};
 
 export default Users;
