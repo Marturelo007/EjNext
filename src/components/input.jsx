@@ -32,6 +32,19 @@ const InputGroup = () => {
         autoComplete="off"
       />
       <label style={userLabelStyle(focused, valid)}>First Name</label>
+
+      <input
+        type="text"
+        ref={inputRef}
+        style={inputStyle(focused, valid)}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        required
+        name="text"
+        autoComplete="off"
+      />
+      <label style={userLabelStyle(focused, valid)}> Name</label>
     </div>
   );
 };
@@ -51,7 +64,7 @@ const inputStyle = (focused, valid) => ({
   transition: 'border 150ms cubic-bezier(0.4,0,0.2,1)',
   borderColor: focused || valid ? '#40c9ff' : '#9e9e9e',
   outline: 'none',
-  
+  marginTop: '5%'
 });
 
 const userLabelStyle = (focused, valid) => ({
@@ -64,7 +77,7 @@ const userLabelStyle = (focused, valid) => ({
   backgroundColor: focused || valid ? '#212121' : 'transparent',
   padding: focused || valid ? '0 .2em' : '0',
   color: focused || valid ? '#2196f3' : '#e8e8e8',
-  
+  marginTop: '5%'
 });
 
 export default InputGroup;

@@ -1,16 +1,16 @@
 "use client"
 import pepe from "/src/app/usersD/pepe.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navigation from "@/components/navigation";
 import Users from "@/components/Users"
-// import { useSocket } from "@/hooks/useSocket";
-// import { Socket } from "socket.io-client";
+import { useSocket } from "@/hooks/useSocket";
+import { Socket } from "socket.io-client";
 
 export default function UsersRanking() {
   
-  /*
+  
   const { socket, isConnected } = useSocket();
-
+  const [message, setMessage] = useState("");
   useEffect(() => {
     if (!socket) return;
 
@@ -18,12 +18,24 @@ export default function UsersRanking() {
       console.log("Me llego el evento pingAll", data);
     })
 
+    socket.on('newMessage', (data) => {
+      console.log("Me llego el evento pingAll", data);
+    })
+
   }, [socket, isConnected]);
 
-  function handleClick() {
+  function handlePing() {
     socket.emit('pingAll', {message: "hola desde mi compu"})
   }
-  */
+
+  function handleSendMessage() {
+    socket.emit('sendMessage', {message: message})
+  }
+
+  function handleChangeInput(event) {
+    setMessage(event.target.value);
+  }
+
   const card = {
     borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
   }
@@ -41,42 +53,11 @@ style={{
 
 <Navigation/>
 <Users/>
-
+{/* <button onClick={handlePing}>Ping all</button>
+<button onClick={()=> socket.emit('joinRoom',{room: "pepito"})}>Conectar unirse a la sala</button>^
+<input onChange={handleChangeInput}/>
+<button onClick={handleSendMessage}>enviar mensaje</button> */}
  </body>
 
   );
 }
-
-
-/* 
-<>
-<h1>HOLA Q ACE</h1>
-<button onClick={handleClick} text="enviar"></button>
-</>
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
