@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import styles from "/src/app/usersD/pepe.css"; // Ensure correct CSS import
+import Image from "next/image";
 
 const cardStyle = {
   borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
@@ -18,12 +19,11 @@ function Users() {
             <div className="card mask-custom">
               <div className="card-body">
                 <ul className="list-unstyled mb-0">
-                  {/* Example User List Item */}
                   {["John Doe", "Danny Smith", "Alex Steward", "Ashley Olsen", "Kate Moss", "Lara Croft", "Brad Pitt"].map((user, index) => (
                     <li key={index} className="p-2 border-bottom" style={cardStyle}>
                       <a href="#!" className="d-flex justify-content-between link-light">
                         <div className="d-flex flex-row">
-                          <img src="/user-icon.png" alt={`Avatar of ${user}`} className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60" />
+                          <Image src="/user-icon.png" alt={`Avatar of ${user}`} className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60" />
                           <div className="pt-1">
                             <p className="text-black fw-bold mb-0">{user}</p>
                             <p className="small text-black">Lorem ipsum dolor sit.</p>
@@ -41,45 +41,51 @@ function Users() {
             </div>
           </div>
 
-          <div className="col-md-6 col-lg-7 col-xl-7" style={{ height: '100vh', overflowY: 'auto' }}>
-            <ul className="list-unstyled text-black">
-              {/* Asking Message (Left aligned) */}
-              <li className="d-flex justify-content-start mb-4">
-                <img src="/user-icon.png" alt="Avatar of Brad Pitt" className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60" />
-                <div className="card mask-custom">
-                  <div className="card-header d-flex justify-content-between p-3" style={cardStyle}>
-                    <p className="text-black fw-bold mb-0">Brad Pitt</p>
-                    <p className="text-dark small mb-0"><i className="far fa-clock"></i> 12 mins ago</p>
+          <div className="col-md-6 col-lg-7 col-xl-7 d-flex flex-column" style={{ marginTop: '5%' }}>
+            <div className="flex-grow-1 overflow-auto">
+              <ul className="list-unstyled text-black">
+                {/* Asking Message (Left aligned) */}
+                <li className="d-flex justify-content-start mb-4">
+                  <img src="/user-icon.png" alt="Avatar of Brad Pitt" className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60" />
+                  <div className="card mask-custom">
+                    <div className="card-header d-flex justify-content-between p-3" style={cardStyle}>
+                      <p className="text-black fw-bold mb-0">Brad Pitt</p>
+                      <p className="text-dark small mb-0"><i className="far fa-clock"></i> 12 mins ago</p>
+                    </div>
+                    <div className="card-body">
+                      <p className="mb-0">Hey everyone, what do you think about the latest movie?</p>
+                    </div>
                   </div>
-                  <div className="card-body">
-                    <p className="mb-0">Hey everyone, what do you think about the latest movie?</p>
-                  </div>
-                </div>
-              </li>
+                </li>
 
-              {/* Response (Right aligned) */}
-              <li className="d-flex justify-content-end mb-4">
-                <div className="card mask-custom">
-                  <div className="card-header d-flex justify-content-between p-3" style={cardStyle}>
-                    <p className="text-black fw-bold mb-0">Lara Croft</p>
-                    <p className="text-dark small mb-0"><i className="far fa-clock"></i> 10 mins ago</p>
+                {/* Response (Right aligned) */}
+                <li className="d-flex justify-content-end mb-4">
+                  <div className="card mask-custom">
+                    <div className="card-header d-flex justify-content-between p-3" style={cardStyle}>
+                      <p className="text-black fw-bold mb-0">Lara Croft</p>
+                      <p className="text-dark small mb-0"><i className="far fa-clock"></i> 10 mins ago</p>
+                    </div>
+                    <div className="card-body">
+                      <p className="mb-0">I thought it was fantastic! The action scenes were amazing.</p>
+                    </div>
                   </div>
-                  <div className="card-body">
-                    <p className="mb-0">I thought it was fantastic! The action scenes were amazing.</p>
-                  </div>
-                </div>
-                <img src="/user-icon.png" alt="Avatar of Lara Croft" className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60" />
-              </li>
+                  <Image src="/user-icon.png" alt="Avatar of Lara Croft" className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60" />
+                </li>
+              </ul>
+            </div>
 
-              {/* Message Input and Send Button */}
-              <li className="mb-3 d-flex align-items-center">
-                <div className="form-outline form-white flex-grow-1">
-                  <textarea className="form-control" id="textAreaExample3" rows="2"></textarea>
-                  <label className="form-label" htmlFor="textAreaExample3">Message</label>
-                </div>
-                <button type="button" className="btn btn-light btn-lg btn-rounded ms-2">Send</button>
-              </li>
-            </ul>
+            {/* Message Input and Send Button */}
+            <div className="mb-3 d-flex align-items-center">
+              <div className="form-outline form-white flex-grow-1">
+                <textarea 
+                  className="form-control" 
+                  id="textAreaExample3" 
+                  rows="2" 
+                  placeholder="Type your message..." // Set placeholder text here
+                ></textarea>
+              </div>
+              <button type="button" className="btn btn-light btn-lg btn-rounded ms-2">Send</button>
+            </div>
           </div>
         </div>
       </div>
