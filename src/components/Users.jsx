@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import pepe from "/src/app/usersDetails/pepe.css";
+import UD from "/src/app/usersDetails/UD.css";
 import Image from "next/image";
 const i = {
   borderRadius: "50%",

@@ -1,5 +1,5 @@
 "use client"
-import pepe from "/src/app/usersDetails/pepe.css";
+import UD from "/src/app/usersDetails/UD.css";
 import { useEffect } from "react";
 import Navigation from "@/components/navigation";
 import Users from "@/components/Users"
@@ -31,7 +31,7 @@ export default function UsersRanking() {
 
 <body
 style={{
-  backgroundColor: `blue`,
+  backgroundColor: `white`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
