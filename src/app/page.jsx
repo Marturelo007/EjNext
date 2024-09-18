@@ -11,12 +11,7 @@ import { useRouter } from "next/navigation";
 import Navigation from "@/components/navigation";
 export default function Home() {
 
-   const router = useRouter();
    const logIn = "#40c9ff"
-
-
-
-  
 
   return (
     <main className={styles.main}>
@@ -26,9 +21,7 @@ export default function Home() {
             <div>
             {/* <input type="text" id="nombreInput" placeholder="Enter your name"/> */}
             <InputGroup/>
-            <Link href="/usersD">
-            <Button></Button>
-            </Link>
+            <Button href="usersD"></Button>
             </div>
 </div>
 
