@@ -1,226 +1,90 @@
 "use client";
 import { useRouter } from "next/navigation";
-import pepe from "/src/app/usersD/pepe.css";
-const i = {
-  borderRadius: "50%",
-   marginRight: "5%",
-}
+import styles from "/src/app/usersD/pepe.css"; // Ensure correct CSS import
+
+const cardStyle = {
+  borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
+};
 
 function Users() {
+  const router = useRouter();
 
-  const card = {
-    borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
-  }
-
-    const router = useRouter()
-
-    return(
-      <section style={pepe.gradientCustom}>
+  return (
+    <section style={styles.gradientCustom}>
       <div className="container py-5">
-    
         <div className="row">
-    
           <div className="col-md-6 col-lg-5 col-xl-5 mb-4 mb-md-0">
-    
             <h5 className="font-weight-bold mb-3 text-center text-white">Member</h5>
-    
             <div className="card mask-custom">
               <div className="card-body">
-    
                 <ul className="list-unstyled mb-0">
-                  <li className="p-2 border-bottom" style={card}>
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                      <img src="/user-icon.png" alt="avatar1"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-                        <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">John Doe</p>
-                          <p className="small text-black">Hello, Are you there?</p>
+                  {/* Example User List Item */}
+                  {["John Doe", "Danny Smith", "Alex Steward", "Ashley Olsen", "Kate Moss", "Lara Croft", "Brad Pitt"].map((user, index) => (
+                    <li key={index} className="p-2 border-bottom" style={cardStyle}>
+                      <a href="#!" className="d-flex justify-content-between link-light">
+                        <div className="d-flex flex-row">
+                          <img src="/user-icon.png" alt={`Avatar of ${user}`} className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60" />
+                          <div className="pt-1">
+                            <p className="text-black fw-bold mb-0">{user}</p>
+                            <p className="small text-black">Lorem ipsum dolor sit.</p>
+                          </div>
                         </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">Just now</p>
-                        <span className="badge bg-danger float-end">1</span>
-                      </div>
-                    </a>
-                  </li>
-                  <li className="p-2 border-bottom" style={card}>
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                        <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
                         <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">Danny Smith</p>
-                          <p className="small text-black">Lorem ipsum dolor sit.</p>
+                          <p className="small text-black mb-1">Just now</p>
+                          <span className="badge bg-danger float-end">1</span>
                         </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">5 mins ago</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li className="p-2 border-bottom" style={card}>
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                      <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-                        <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">Alex Steward</p>
-                          <p className="small text-black">Lorem ipsum dolor sit.</p>
-                        </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">Yesterday</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li className="p-2 border-bottom" style={card}>
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                      <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-                        <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">Ashley Olsen</p>
-                          <p className="small text-black">Lorem ipsum dolor sit.</p>
-                        </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">Yesterday</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li className="p-2 border-bottom" style={card}>
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                      <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-                        <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">Kate Moss</p>
-                          <p className="small text-black">Lorem ipsum dolor sit.</p>
-                        </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">Yesterday</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li className="p-2 border-bottom" style={card}>
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                      <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-                        <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">Lara Croft</p>
-                          <p className="small text-black">Lorem ipsum dolor sit.</p>
-                        </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">Yesterday</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li className="p-2">
-                    <a href="#!" className="d-flex justify-content-between link-light">
-                      <div className="d-flex flex-row">
-                      <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-                        <div className="pt-1">
-                          <p className="text-black fw-bold mb-0">Brad Pitt</p>
-                          <p className="small text-black">Lorem ipsum dolor sit.</p>
-                        </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small text-black mb-1">5 mins ago</p>
-                        <span className="text-black float-end"><i className="fas fa-check" aria-hidden="true"></i></span>
-                      </div>
-                    </a>
-                  </li>
+                      </a>
+                    </li>
+                  ))}
                 </ul>
-    
               </div>
             </div>
-    
           </div>
-    
+
           <div className="col-md-6 col-lg-7 col-xl-7" style={{ height: '100vh', overflowY: 'auto' }}>
-    
             <ul className="list-unstyled text-black">
-              <li className="d-flex justify-content-between mb-4">
-              <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
+              {/* Asking Message (Left aligned) */}
+              <li className="d-flex justify-content-start mb-4">
+                <img src="/user-icon.png" alt="Avatar of Brad Pitt" className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60" />
                 <div className="card mask-custom">
-                  <div className="card-header d-flex justify-content-between p-3"
-                    style={card}>
+                  <div className="card-header d-flex justify-content-between p-3" style={cardStyle}>
                     <p className="text-black fw-bold mb-0">Brad Pitt</p>
                     <p className="text-dark small mb-0"><i className="far fa-clock"></i> 12 mins ago</p>
                   </div>
                   <div className="card-body">
-                    <p className="mb-0">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.
-                    </p>
+                    <p className="mb-0">Hey everyone, what do you think about the latest movie?</p>
                   </div>
                 </div>
               </li>
-              <li className="d-flex justify-content-between mb-4">
-                <div className="card mask-custom w-100">
-                  <div className="card-header d-flex justify-content-between p-3"
-                    style={card}>
-                    <p className="text-black fw-bold mb-0">Lara Croft</p>
-                    <p className="text-dark small mb-0"><i className="far fa-clock"></i> 13 mins ago</p>
-                  </div>
-                  <div className="card-body">
-                    <p className="mb-0">
-                      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                      laudantium.
-                    </p>
-                  </div>
-                </div>
-                <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
-              </li>
-              <li className="d-flex justify-content-between mb-4">
-              <img src="/user-icon.png" alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60"></img>
-    
+
+              {/* Response (Right aligned) */}
+              <li className="d-flex justify-content-end mb-4">
                 <div className="card mask-custom">
-                  <div className="card-header d-flex justify-content-between p-3"
-                    style={card}>
-                    <p className="text-black fw-bold mb-0">Brad Pitt</p>
+                  <div className="card-header d-flex justify-content-between p-3" style={cardStyle}>
+                    <p className="text-black fw-bold mb-0">Lara Croft</p>
                     <p className="text-dark small mb-0"><i className="far fa-clock"></i> 10 mins ago</p>
                   </div>
                   <div className="card-body">
-                    <p className="mb-0">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.
-                    </p>
+                    <p className="mb-0">I thought it was fantastic! The action scenes were amazing.</p>
                   </div>
                 </div>
+                <img src="/user-icon.png" alt="Avatar of Lara Croft" className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60" height="60" />
               </li>
-              <li className="mb-3">
-                <div data-mdb-input-init className="form-outline form-white">
-                  <textarea className="form-control" id="textAreaExample3" rows="4"></textarea>
-                  <label className="form-label" forhtml="textAreaExample3">Message</label>
+
+              {/* Message Input and Send Button */}
+              <li className="mb-3 d-flex align-items-center">
+                <div className="form-outline form-white flex-grow-1">
+                  <textarea className="form-control" id="textAreaExample3" rows="2"></textarea>
+                  <label className="form-label" htmlFor="textAreaExample3">Message</label>
                 </div>
+                <button type="button" className="btn btn-light btn-lg btn-rounded ms-2">Send</button>
               </li>
-              <button  type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-light btn-lg btn-rounded float-end">Send</button>
             </ul>
-    
           </div>
-    
         </div>
-    
       </div>
     </section>
-    );
+  );
 }
 
 export default Users;
