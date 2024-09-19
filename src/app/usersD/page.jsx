@@ -43,7 +43,7 @@ export default function UsersRanking() {
 
 <body
 style={{
-  backgroundColor: `blue`,
+backgroundImage: 'url(WAback.jpg)',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
