@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import styles from "/src/app/usersD/pepe.css"; // Ensure correct CSS import
+import styles from "/src/app/usersD/pepe.css";
 import Image from "next/image";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faP } from '@fortawesome/free-solid-svg-icons';
