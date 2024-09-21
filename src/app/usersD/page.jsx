@@ -47,8 +47,7 @@ backgroundImage: 'url(WAback.jpg)',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
-  height: '100vh',
-  width: '100vw'
+  // overflowY: 'hidden'
   }}>
 
 <Navigation/>
