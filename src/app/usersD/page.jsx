@@ -41,7 +41,7 @@ export default function UsersRanking() {
   }
   return(
 
-<body
+<main
 style={{
 backgroundImage: 'url(WAback.jpg)',
   backgroundSize: 'cover',
@@ -56,7 +56,7 @@ backgroundImage: 'url(WAback.jpg)',
 <button onClick={()=> socket.emit('joinRoom',{room: "pepito"})}>Conectar unirse a la sala</button>^
 <input onChange={handleChangeInput}/>
 <button onClick={handleSendMessage}>enviar mensaje</button> */}
- </body>
+ </main>
 
   );
 }

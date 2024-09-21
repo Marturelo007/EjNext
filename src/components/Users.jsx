@@ -1,16 +1,16 @@
 "use client";
 import { useRouter } from "next/navigation";
-import styles from "/src/app/usersD/pepe.css"; // Ensure your CSS is set up properly
+import styles from "/src/app/usersD/pepe.css";
 import Image from "next/image";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faPaperPlane, faMicrophone, faPaperclip, faLaughBeam } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 
 const cardStyle = {
   borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
 };
 
-// Image mapping for users
 const userImages = {
   "Drogon": "/drogon.jpg",
   "Arya Stark": "/arya.webp",
@@ -28,7 +28,6 @@ function Users() {
     console.log("Message sent:", message);
     setMessage("");
   };
-
   return (
     <section style={styles.gradientCustom}>
       <div className="container py-5">
@@ -89,11 +88,9 @@ function Users() {
                     </div>
                   </div>
                 </li>
-                {/* Add more messages as needed */}
               </ul>
             </div>
 
-            {/* Message Input and Send Button */}
             <div className="mb-3 d-flex align-items-center" style={{ backgroundColor: '#e1e1e1', padding: '10px', borderRadius: '5px' }}>
               <FontAwesomeIcon icon={faPaperclip} />
               <FontAwesomeIcon icon={faLaughBeam} style={{ padding: '2%' }} />

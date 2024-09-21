@@ -2,7 +2,8 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 const userIcon = {
   padding: `2%`,
 };
@@ -16,7 +17,7 @@ function Navigation() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary" style={navbarStyle}>
       <div className="container">
         <Link className="navbar-brand" href="/">
-          <Image src="/signOut.png" width={50} height={50} alt="Log out" /> Log out
+          <FontAwesomeIcon icon={faArrowRightFromBracket} size="2x"/> Log out
         </Link>
         <button
           className="navbar-toggler"
