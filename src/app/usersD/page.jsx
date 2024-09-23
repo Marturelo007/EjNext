@@ -40,23 +40,22 @@ export default function UsersRanking() {
     borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
   }
   return(
+  <main
+    style={{
+      backgroundImage: 'url(WAback.jpg)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      // overflowY: 'hidden'
+      }}>
 
-<main
-style={{
-backgroundImage: 'url(WAback.jpg)',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  backgroundRepeat: 'no-repeat',
-  // overflowY: 'hidden'
-  }}>
-
-<Navigation/>
-<Users/>
-{/* <button onClick={handlePing}>Ping all</button>
-<button onClick={()=> socket.emit('joinRoom',{room: "pepito"})}>Conectar unirse a la sala</button>^
-<input onChange={handleChangeInput}/>
-<button onClick={handleSendMessage}>enviar mensaje</button> */}
- </main>
+    <Navigation/>
+    <Users/>  
+    {/* <button onClick={handlePing}>Ping all</button>
+    <button onClick={()=> socket.emit('joinRoom',{room: "pepito"})}>Conectar unirse a la sala</button>^
+    <input onChange={handleChangeInput}/>
+    <button onClick={handleSendMessage}>enviar mensaje</button> */}
+  </main>
 
   );
 }

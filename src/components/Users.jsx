@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import styles from "/src/app/usersD/pepe.css";
 import Image from "next/image";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faPaperPlane, faMicrophone, faPaperclip, faLaughBeam } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faPaperPlane, faMicrophone, faPaperclip, faLaughBeam, faClockFour } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
 

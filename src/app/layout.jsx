@@ -23,7 +23,13 @@ export default function RootLayout({ children }) {
   }, []);
 
   if (loading) {
-    return <Spinner />;
+    return (
+      <html>
+        <body>
+          <Spinner />
+        </body>
+      </html>
+    );
   }
   return (
     <html lang="en">

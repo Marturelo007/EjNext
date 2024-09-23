@@ -3,7 +3,6 @@ import InputGroup from "@/components/input";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Button from "@/components/button";
-import Checkbox from "@/components/checkbox";
 import { useState } from "react";
 import { useEffect } from "react";
 import Link from "next/link";
@@ -15,16 +14,14 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-
-<div className={styles.formContainer}>
-  <h3 style={{color: logIn}}>User log in</h3>
-            <div>
-            {/* <input type="text" id="nombreInput" placeholder="Enter your name"/> */}
-            <InputGroup/>
-            <Button href="usersD"></Button>
-            </div>
-</div>
-
+      <div className={styles.formContainer}>
+        <h3 style={{color: logIn}}>User log in</h3>
+                  <div>
+                    {/* npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-brands-svg-icons */}
+                    <InputGroup/>
+                    <Button href="usersD"></Button>
+                  </div>
+      </div>
     </main>
   );
 }
