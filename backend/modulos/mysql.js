@@ -6,8 +6,8 @@ const mySql = require("mysql2/promise");
  */
 const SQL_CONFIGURATION_DATA =
 {
-	//host: "10.1.5.205", //IP privada del servidor del colegio
-	host: "181.47.29.35", //IP pública del servidor del colegio
+	host: "10.1.5.205", //IP privada del servidor del colegio
+	//host: "181.47.29.35", //IP pública del servidor del colegio
 	user: "2024-5AINF-G09",
 	password: "elchavo",
 	database: "TpWhatsApp",
@@ -39,3 +39,6 @@ exports.realizarQuery = async function (queryString)
 	}
 	return returnObject[0];
 }
+
+
+

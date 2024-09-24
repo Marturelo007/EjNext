@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faPaperPlane, faMicrophone, faPaperclip, faLaughBeam, faClockFour } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import { actionAsyncStorage } from "next/dist/client/components/action-async-storage-instance";
 
 
 const cardStyle = {
@@ -84,7 +85,7 @@ function Users() {
                       </p>
                     </div>
                     <div className="card-body">
-                      <p className="mb-0">Hey everyone, what do you think about the latest movie?</p>
+                      <p className="mb-0">Hey, what do you think about the latest movie?</p>
                     </div>
                   </div>
                 </li>
@@ -123,3 +124,9 @@ function Users() {
 }
 
 export default Users;
+
+
+/*
+ 
+ 
+ */
