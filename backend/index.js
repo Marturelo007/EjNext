@@ -209,7 +209,7 @@ app.delete('/deleteMensaje', async function(req, res){
 
 io.on("connection", (socket) => {
 	const req = socket.request;
-
+  //data tiene que ser user 1 y 2
 	socket.on('joinRoom', data => {
 		console.log("🚀 ~ io.on ~ req.session.room:", req.session.room)
 		if (req.session.room != undefined && req.session.room.length > 0)
