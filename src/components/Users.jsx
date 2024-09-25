@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faPaperPlane, faMicrophone, faPaperclip, faLaughBeam, faClockFour } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { actionAsyncStorage } from "next/dist/client/components/action-async-storage-instance";
-
-
+import { useSocket } from "@/hooks/useSocket";
+import ChatCard from "./chatCard";
 const cardStyle = {
   borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
 };
@@ -22,11 +22,43 @@ const userImages = {
 };
 
 function Users() {
+  const { socket, isConnected } = useSocket();
   const router = useRouter();
   const [message, setMessage] = useState("");
+  const [chatId, setChatId] = useState(0);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on('pingAll', (data) => {
+      console.log("Me llego el evento pingAll", data);
+    })
+
+    socket.on('newMessage', (data) => {
+      console.log("Me llego el evento pingAll", data);
+    })
+
+  }, [socket, isConnected]);
+
+  function handleClickContact(event) {
+    // 1er Paso: Identificar algo caracteristico de cada usuario cuando toco el <a>
+    var nombreChat = event.target.id;
+    console.log(nombreChat, event.target);
+    // Uso el nombre eg Drogon
+      // 2do Paso: Hago Fetch enviandole al back ese nombre eg Drogon
+    // fetchChatId() 
+    // 3er Paso: El back me responde con el chatId y lo guarda en el useState
+    // 4to Paso: Usamos el chatId como identificador UNICO de sala entre usuarios
+    // crear un componente chat
+
+    console.log("Joinning Room");
+    // -- Desconectarse del room antes de conectarse a uno nuevo --
+    socket.emit('joinRoom', chatId)
+  }
 
   const handleSendMessage = () => {
     console.log("Message sent:", message);
+    socket.emit("newMessage")
     setMessage("");
   };
   return (
@@ -38,29 +70,9 @@ function Users() {
             <div className="card mask-custom">
               <div className="card-body">
                 <ul className="list-unstyled mb-0">
-                  {["Drogon", "Arya Stark", "Sansa Stark", "Tyrion Lannister", "Daenerys Targaryen", "Jon Snow"].map((user, index) => (
-                    <li key={index} className="p-2 border-bottom" style={cardStyle}>
-                      <a href="#!" className="d-flex justify-content-between link-light">
-                        <div className="d-flex flex-row">
-                          <Image 
-                            src={userImages[user]} 
-                            alt={`Avatar of ${user}`} 
-                            className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" 
-                            width="60" 
-                            height="60" 
-                          />
-                          <div className="pt-1">
-                            <p className="text-black fw-bold mb-0">{user}</p>
-                            <p className="small text-black">Lorem ipsum dolor sit.</p>
-                          </div>
-                        </div>
-                        <div className="pt-1">
-                          <p className="small text-black mb-1">Just now</p>
-                          <span className="badge bg-danger float-end">1</span>
-                        </div>
-                      </a>
-                    </li>
-                  ))}
+                {["Drogon", "Arya Stark", "Sansa Stark", "Tyrion Lannister", "Daenerys Targaryen", "Jon Snow"].map((user, index) => (
+                    <ChatCard/>
+                ))};
                 </ul>
               </div>
             </div>
@@ -124,9 +136,3 @@ function Users() {
 }
 
 export default Users;
-
-
-/*
- 
- 
- */

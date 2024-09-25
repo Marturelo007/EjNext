@@ -44,7 +44,7 @@ const InputGroup = () => {
         name="text"
         autoComplete="off"
       />
-      <label style={userLabelStyle(focused, valid)}> password
+      <label style={userLabelStyle(focused, valid)}> Password
       </label>
     </div>
   );

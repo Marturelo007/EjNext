@@ -17,18 +17,18 @@ const server = app.listen(LISTEN_PORT, () => {
   
   console.log(`Server running in http://localhost:${LISTEN_PORT}`);
   console.log("Defined routes:");
-  console.log("   [GET] http://localhost:3000/getUsers");
-  console.log("   [POST] http://localhost:3000/insertUsers");
-  console.log("   [PUT] http://localhost:3000/putUsers");
-  console.log("   [DELETE] http://localhost:3000/deleteUsers");
-  console.log("   [GET] http://localhost:3000/getChats");
-  console.log("   [POST] http://localhost:3000/insertChats");
-  console.log("   [PUT] http://localhost:3000/putChats");
-  console.log("   [DELETE] http://localhost:3000/deleteChats");
-  console.log("   [GET] http://localhost:3000/getMensajes");
-  console.log("   [POST] http://localhost:3000/insertMensajes");
-  console.log("   [PUT] http://localhost:3000/putMensajes");
-  console.log("   [DELETE] http://localhost:3000/deleteMensajes");
+  console.log("   [GET] http://localhost:4000/getUsers");
+  console.log("   [POST] http://localhost:4000/insertUsers");
+  console.log("   [PUT] http://localhost:4000/putUsers");
+  console.log("   [DELETE] http://localhost:4000/deleteUsers");
+  console.log("   [GET] http://localhost:4000/getChats");
+  console.log("   [POST] http://localhost:4000/insertChats");
+  console.log("   [PUT] http://localhost:4000/putChats");
+  console.log("   [DELETE] http://localhost:4000/deleteChats");
+  console.log("   [GET] http://localhost:4000/getMensajes");
+  console.log("   [POST] http://localhost:4000/insertMensajes");
+  console.log("   [PUT] http://localhost:4000/putMensajes");
+  console.log("   [DELETE] http://localhost:4000/deleteMensajes");
 });;
 
 const io = require('socket.io')(server, {
