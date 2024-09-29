@@ -24,7 +24,7 @@ function formatTimestamp(timestamp) {
 function Users() {
   const { socket } = useSocket();
   const [message, setMessage] = useState("");
-  const [chatId, setChatId] = useState(null);
+  // const [chatId, setChatId] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
@@ -79,27 +79,27 @@ function Users() {
     setMessage(event.target.value);
   };
 
-  const fetchChatId = async (userName) => {
-    setLoading(true);
-    try {
-      const response = await fetch(`http://localhost:4000/getChatId`);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      setChatId(data.chatId);
-      socket.emit('joinRoom', { room: data.chatId });
-    } catch (error) {
-      console.error("Error fetching chat ID:", error);
-      setError("Failed to fetch chat ID.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const fetchChatId = async (userName) => {
+  //   setLoading(true);
+  //   try {
+  //     const response = await fetch(`http://localhost:4000/getChatId`);
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok');
+  //     }
+  //     const data = await response.json();
+  //     setChatId(data.chatId);
+  //     socket.emit('joinRoom', { room: data.chatId });
+  //   } catch (error) {
+  //     console.error("Error fetching chat ID:", error);
+  //     setError("Failed to fetch chat ID.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const handleClickContact = (event) => {
     const userName = event.currentTarget.id; 
-    fetchChatId(userName);
+    // fetchChatId(userName);
   };
 
   return (

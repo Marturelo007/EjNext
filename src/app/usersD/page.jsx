@@ -13,13 +13,19 @@ export default function UsersRanking() {
   const [message, setMessage] = useState("");
   useEffect(() => {
     if (!socket) return;
-
-
-    socket.on('newMessage', (data) => {
+  
+    const handleNewMessage = (data) => {
       console.log("Me llego el evento pingAll", data);
-    })
-
+    };
+  
+    socket.on('newMessage', handleNewMessage);
+  
+    // Limpieza
+    return () => {
+      socket.off('newMessage', handleNewMessage);
+    };
   }, [socket, isConnected]);
+  
 
   // function handlePing() {
   //   socket.emit('pingAll', {message: "hola desde mi compu"})

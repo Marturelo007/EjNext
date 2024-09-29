@@ -136,43 +136,43 @@ app.post("/insertChats", async function (req, res) {
 
   res.send("Chat inserted successfully.");
 });
-app.get("/getChatId", async function (req, res) {
-  const { user1, user2 } = req.query;
+// app.get("/getChatId", async function (req, res) {
+//   const { user1, user2 } = req.query;
 
-  const chat = await MySQL.realizarQuery(
-    `SELECT chatID FROM chats WHERE (user1 = '${user1}' AND user2 = '${user2}') OR (user1 = '${user2}' AND user2 = '${user1}')`
-  );
+//   const chat = await MySQL.realizarQuery(
+//     `SELECT chatID FROM chats WHERE (user1 = '${user1}' AND user2 = '${user2}') OR (user1 = '${user2}' AND user2 = '${user1}')`
+//   );
 
-  if (chat.length > 0) {
-    res.send({ chatId: chat[0].chatID });
-  } else {
-    res.status(404).send({ message: "Chat not found." });
-  }
-});
+//   if (chat.length > 0) {
+//     res.send({ chatId: chat[0].chatID });
+//   } else {
+//     res.status(404).send({ message: "Chat not found." });
+//   }
+// });
 
 
-io.on("connection", (socket) => {
-  const req = socket.request;
+// io.on("connection", (socket) => {
+//   const req = socket.request;
 
-  socket.on('joinRoom', async (data) => {
-    const { user1, user2 } = data;
-    const chat = await MySQL.realizarQuery(
-      `SELECT chatID FROM chats WHERE (user1 = '${user1}' AND user2 = '${user2}') OR (user1 = '${user2}' AND user2 = '${user1}')`
-    );
+//   socket.on('joinRoom', async (data) => {
+//     const { user1, user2 } = data;
+//     const chat = await MySQL.realizarQuery(
+//       `SELECT chatID FROM chats WHERE (user1 = '${user1}' AND user2 = '${user2}') OR (user1 = '${user2}' AND user2 = '${user1}')`
+//     );
 
-    if (chat.length > 0) {
-      socket.join(chat[0].chatID);
-      req.session.room = chat[0].chatID; // Save room in session
-      console.log(`User joined room: ${chat[0].chatID}`);
-    } else {
-      console.error("Chat not found.");
-    }
-  });
+//     if (chat.length > 0) {
+//       socket.join(chat[0].chatID);
+//       req.session.room = chat[0].chatID; // Save room in session
+//       console.log(`User joined room: ${chat[0].chatID}`);
+//     } else {
+//       console.error("Chat not found.");
+//     }
+//   });
 
-  socket.on('sendMessage', (data) => {
-    io.to(req.session.room).emit('newMessage', { room: req.session.room, message: data });
-  });
-});
+//   socket.on('sendMessage', (data) => {
+//     io.to(req.session.room).emit('newMessage', { room: req.session.room, message: data });
+//   });
+// });
 
 
 app.put('/putChats', async function(req, res){
