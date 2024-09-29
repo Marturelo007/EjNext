@@ -19,7 +19,6 @@ export default function Home() {
                   <div>
                     {/* npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-brands-svg-icons */}
                     <InputGroup/>
-                    <Button href="usersD"></Button>
                   </div>
       </div>
     </main>

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,8 +9,8 @@ const userIcon = {
 };
 
 const navbarStyle = {
-  padding: '0.5rem 1rem', // Adjusts the vertical padding
-};
+  padding: '0.5rem 1rem',
+}
 
 function Navigation() {
   return (

@@ -122,20 +122,58 @@ app.post("/insertChats", async function (req, res) {
   console.log(req.body);
 
   const existingChat = await MySQL.realizarQuery(
-    `SELECT * FROM chats WHERE chatsID = '${req.body.chatsID}'`
+    `SELECT * FROM chats WHERE user1 = '${req.body.user1}' AND user2 = '${req.body.user2}'`
   );
 
   if (existingChat.length > 0) {
-    console.error("a chat with this ID allredy exist.");
-    return res.status(400).send("a chat with this ID allredy exist.");
+    console.error("A chat with these users already exists.");
+    return res.status(400).send("A chat with these users already exists.");
   }
 
   await MySQL.realizarQuery(
-    `INSERT INTO chats (chatsID, user1, user2 ) VALUES ('${req.body.chatsID}','${req.body.user1}', '${req.body.user2}'`
+    `INSERT INTO chats (user1, user2) VALUES ('${req.body.user1}', '${req.body.user2}')`
   );
 
-  res.send("chat insert succeffuly.");
+  res.send("Chat inserted successfully.");
 });
+app.get("/getChatId", async function (req, res) {
+  const { user1, user2 } = req.query;
+
+  const chat = await MySQL.realizarQuery(
+    `SELECT chatID FROM chats WHERE (user1 = '${user1}' AND user2 = '${user2}') OR (user1 = '${user2}' AND user2 = '${user1}')`
+  );
+
+  if (chat.length > 0) {
+    res.send({ chatId: chat[0].chatID });
+  } else {
+    res.status(404).send({ message: "Chat not found." });
+  }
+});
+
+
+io.on("connection", (socket) => {
+  const req = socket.request;
+
+  socket.on('joinRoom', async (data) => {
+    const { user1, user2 } = data;
+    const chat = await MySQL.realizarQuery(
+      `SELECT chatID FROM chats WHERE (user1 = '${user1}' AND user2 = '${user2}') OR (user1 = '${user2}' AND user2 = '${user1}')`
+    );
+
+    if (chat.length > 0) {
+      socket.join(chat[0].chatID);
+      req.session.room = chat[0].chatID; // Save room in session
+      console.log(`User joined room: ${chat[0].chatID}`);
+    } else {
+      console.error("Chat not found.");
+    }
+  });
+
+  socket.on('sendMessage', (data) => {
+    io.to(req.session.room).emit('newMessage', { room: req.session.room, message: data });
+  });
+});
+
 
 app.put('/putChats', async function(req, res){
   await MySQL.realizarQuery(`UPDATE chats
@@ -206,6 +244,61 @@ app.delete('/deleteMensaje', async function(req, res){
     res.status(500).send('Internal server error');
   }
 })
+
+
+const bcrypt = require('bcrypt');
+const { realizarQuery } = require('./modulos/mysql'); // Ensure this path is correct
+
+app.use(express.json());
+
+app.post('/login', async (req, res) => {
+  const { userID, password } = req.body;
+
+  console.log(`Attempting login for userID: ${userID} with password: ${password}`);
+
+  try {
+      const results = await realizarQuery('SELECT * FROM users WHERE userID = ?', [userID]);
+
+      if (results.length === 0) {
+          console.log('No user found');
+          return res.status(401).json({ message: 'No user found' });
+      }
+
+      const user = results[0];
+      console.log(`User found: ${user.userName}, stored password: ${user.password}`);
+
+      // Compare password directly
+      if (password && user.password !== password) {
+          console.log('Invalid password');
+          return res.status(401).json({ message: 'Invalid password' });
+      }
+
+      // Store userID on successful login
+      const loggedInUserID = userID;
+      console.log(`User Name: ${user.userName}, User ID: ${loggedInUserID}`);
+      
+      return res.json({ 
+          message: 'Login successful!', 
+          userName: user.userName,
+          userID: loggedInUserID // Include userID in the response if needed
+      });
+
+  } catch (error) {
+      console.error("Error during login:", error);
+      return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+  
+app.get("/getUsersName", async (req, res) => {
+  try {
+    const users = await MySQL.realizarQuery("SELECT userName FROM users");
+    res.json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 
 io.on("connection", (socket) => {
 	const req = socket.request;

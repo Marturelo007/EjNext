@@ -22,51 +22,84 @@ function formatTimestamp(timestamp) {
 }
 
 function Users() {
-  const { socket, isConnected } = useSocket();
+  const { socket } = useSocket();
   const [message, setMessage] = useState("");
   const [chatId, setChatId] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [error, setError] = useState("");
 
-  
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/getUsersName");
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        setError("Failed to load users.");
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
   useEffect(() => {
     if (!socket) return;
-    
+
     const handleNewMessage = (data) => {
       setMessages(prev => [...prev, { ...data, timestamp: Date.now() }]);
     };
-    
+
     socket.on('newMessage', handleNewMessage);
 
     return () => {
       socket.off('newMessage', handleNewMessage);
     };
-  }, [socket, isConnected]);
+  }, [socket]);
+
+  const handleSendMessage = async () => {
+    if (!message.trim()) return;
+    setLoading(true);
+    try {
+      await socket.emit('sendMessage', { message });
+      setMessage("");
+    } catch (error) {
+      console.error("Error sending message:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChangeInput = (event) => {
+    setMessage(event.target.value);
+  };
 
   const fetchChatId = async (userName) => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/getChatId?user=${userName}`);
+      const response = await fetch(`http://localhost:4000/getChatId`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
       const data = await response.json();
       setChatId(data.chatId);
       socket.emit('joinRoom', { room: data.chatId });
     } catch (error) {
       console.error("Error fetching chat ID:", error);
+      setError("Failed to fetch chat ID.");
     } finally {
       setLoading(false);
     }
   };
 
   const handleClickContact = (event) => {
-    const userName = event.target.id;
-    console.log(userName)
+    const userName = event.currentTarget.id; 
     fetchChatId(userName);
-  };
-
-  const handleSendMessage = () => {
-    if (!message.trim() || chatId === null) return;
-    socket.emit("sendMessage", { message, chatId });
-    setMessage("");
   };
 
   return (
@@ -78,10 +111,11 @@ function Users() {
             <div className="card mask-custom">
               <div className="card-body">
                 <ul className="list-unstyled mb-0">
-                  {["Drogon", "Arya Stark", "Sansa Stark", "Tyrion Lannister", "Daenerys Targaryen", "Jon Snow"].map((user, index) => (
-                    <ChatCard key={index} id={user} onClick={handleClickContact} />
+                  {users.map((user, index) => (
+                    <ChatCard key={index} id={user.userName} onClick={handleClickContact} />
                   ))}
                 </ul>
+                {error && <p className="text-danger">{error}</p>}
               </div>
             </div>
           </div>
@@ -124,7 +158,7 @@ function Users() {
                   placeholder="Type your message..."
                   style={{ border: 'none', backgroundColor: 'transparent', resize: 'none', outline: 'none' }}
                   value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                  onChange={handleChangeInput}
                 />
               </div>
               <FontAwesomeIcon icon={faMicrophone} size="1x" style={{ padding: '2%' }} />

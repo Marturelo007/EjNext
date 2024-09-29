@@ -3,9 +3,9 @@ import styles from './button.module.css';
 import React from "react";
 import Link from "next/link"; // Import Link here
 
-export default function Button({ href, children }) {
+export default function Button({ href, children, onClick }) {
     return (
-        <Link href={href}> {/* Wrap the button content with Link */}
+        <Link href={href} onClick={onClick}> {/* Wrap the button content with Link */}
             <div className={styles.card}>
             <a>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" className={styles.socialSvg}>

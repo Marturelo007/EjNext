@@ -14,9 +14,6 @@ export default function UsersRanking() {
   useEffect(() => {
     if (!socket) return;
 
-    socket.on('pingAll', (data) => {
-      console.log("Me llego el evento pingAll", data);
-    })
 
     socket.on('newMessage', (data) => {
       console.log("Me llego el evento pingAll", data);
@@ -24,9 +21,9 @@ export default function UsersRanking() {
 
   }, [socket, isConnected]);
 
-  function handlePing() {
-    socket.emit('pingAll', {message: "hola desde mi compu"})
-  }
+  // function handlePing() {
+  //   socket.emit('pingAll', {message: "hola desde mi compu"})
+  // }
 
   function handleSendMessage() {
     socket.emit('sendMessage', {message: message})
@@ -50,8 +47,8 @@ export default function UsersRanking() {
       }}>
 
     <Navigation/>
-    <Users/>  
-    <button onClick={handlePing}>Ping all</button>
+    <Users/>
+    {/* <button onClick={handlePing}>Ping all</button> */}
     <button onClick={()=> socket.emit('joinRoom',{room: "pepito"})}>Conectar unirse a la sala</button>^
     <input onChange={handleChangeInput}/>
     <button onClick={handleSendMessage}>enviar mensaje</button>
