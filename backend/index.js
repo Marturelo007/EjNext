@@ -302,16 +302,35 @@ app.get("/getUsersName", async (req, res) => {
 
 io.on("connection", (socket) => {
 	const req = socket.request;
-  //data tiene que ser user 1 y 2
-	socket.on('joinRoom', data => {
-		console.log("🚀 ~ io.on ~ req.session.room:", req.session.room)
-		if (req.session.room != undefined && req.session.room.length > 0)
-			socket.leave(req.session.room);
-		req.session.room = data.room;
-		socket.join(req.session.room);
 
-		io.to(req.session.room).emit('chat-messages', { user: req.session.user, room: req.session.room });
-	});
+	// socket.on('joinRoom', data => {
+	// 	console.log("🚀 ~ io.on ~ req.session.room:", req.session.room)
+	// 	if (req.session.room != undefined && req.session.room.length > 0)
+	// 		socket.leave(req.session.room);
+	// 	req.session.room = data.room;
+	// 	socket.join(req.session.room);
+
+	// 	io.to(req.session.room).emit('chat-messages', { user: req.session.user, room: req.session.room });
+	// });
+    socket.on('joinRoom', (data, callback) => {
+        const { room } = data;
+        if (room) {
+            // Leave previous room if exists
+            if (req.session.room) {
+                socket.leave(req.session.room);
+            }
+
+            // Join the new room
+            socket.join(room);
+            req.session.room = room; // Save the room in session
+            console.log(`User joined room: ${room}`);
+
+            // Optionally emit a welcome message or list of users in the room
+            callback({ success: true, room });
+        } else {
+            callback({ success: false, error: 'Room name is required.' });
+        }
+    });
 
 	socket.on('pingAll', data => {
 		console.log("PING ALL: ", data);
@@ -320,6 +339,8 @@ io.on("connection", (socket) => {
 
 	socket.on('sendMessage', data => {
 		io.to(req.session.room).emit('newMessage', { room: req.session.room, message: data });
+    console.log("Message received:", data);
+        socket.to(data.room).emit("newMessage", data);
 	});
 
 	socket.on('disconnect', () => {

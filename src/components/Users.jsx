@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useState } from "react";
 import { useSocket } from "@/hooks/useSocket";
 import ChatCard from "./chatCard";
@@ -14,6 +13,7 @@ const userImages = {
   "Tyrion Lannister": "/tyrion.jpg",
   "Daenerys Targaryen": "/daenerys.jpg",
   "Jon Snow": "/jon.jpg",
+  "admin" : "/user-icon.png"
 };
 
 function formatTimestamp(timestamp) {
@@ -21,14 +21,14 @@ function formatTimestamp(timestamp) {
   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-function Users() {
-  const { socket } = useSocket();
+function Users({ loggedInUserID }) {
+  const { socket, isConnected } = useSocket();
   const [message, setMessage] = useState("");
-  // const [chatId, setChatId] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
+  const [currentRoom, setCurrentRoom] = useState(null);
+  const [lastSentMessage, setLastSentMessage] = useState(null); // State to hold the last sent message
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -52,7 +52,7 @@ function Users() {
     if (!socket) return;
 
     const handleNewMessage = (data) => {
-      setMessages(prev => [...prev, { ...data, timestamp: Date.now() }]);
+      setMessages((prevMessages) => [...prevMessages, data]);
     };
 
     socket.on('newMessage', handleNewMessage);
@@ -62,44 +62,34 @@ function Users() {
     };
   }, [socket]);
 
-  const handleSendMessage = async () => {
-    if (!message.trim()) return;
-    setLoading(true);
-    try {
-      await socket.emit('sendMessage', { message });
-      setMessage("");
-    } catch (error) {
-      console.error("Error sending message:", error);
-    } finally {
-      setLoading(false);
+  function handleSendMessage() {
+    if (message.trim() && currentRoom) {
+      const messageData = { message, room: currentRoom, timestamp: Date.now(), user: loggedInUserID };
+      console.log("Sending message:", messageData); // Log the message data to the console
+      socket.emit('sendMessage', messageData);
+      setMessages((prevMessages) => [...prevMessages, messageData]); // Update messages state to show immediately
+      setLastSentMessage(messageData); // Update last sent message
+      setMessage(""); // Clear the input after sending
     }
-  };
+  }
 
-  const handleChangeInput = (event) => {
+  function handleChangeInput(event) {
     setMessage(event.target.value);
-  };
-
-  // const fetchChatId = async (userName) => {
-  //   setLoading(true);
-  //   try {
-  //     const response = await fetch(`http://localhost:4000/getChatId`);
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //     const data = await response.json();
-  //     setChatId(data.chatId);
-  //     socket.emit('joinRoom', { room: data.chatId });
-  //   } catch (error) {
-  //     console.error("Error fetching chat ID:", error);
-  //     setError("Failed to fetch chat ID.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  }
 
   const handleClickContact = (event) => {
-    const userName = event.currentTarget.id; 
-    // fetchChatId(userName);
+    const userName = event.currentTarget.id;
+    const roomName = `room_${loggedInUserID}_${userName}`;
+    setCurrentRoom(roomName);
+    socket.emit('joinRoom', { room: roomName }, (response) => {
+      if (response.success) {
+          console.log(`Successfully joined room: ${response.room}`);
+      } else {
+          console.error(response.error);
+      }
+  });
+  
+    setMessages([]); // Clear previous messages when switching rooms
   };
 
   return (
@@ -167,11 +157,18 @@ function Users() {
                 className="btn btn-primary"
                 style={{ marginLeft: '8px' }}
                 onClick={handleSendMessage}
-                disabled={loading}
+                disabled={!currentRoom}
               >
                 <FontAwesomeIcon icon={faPaperPlane} /> Send
               </button>
             </div>
+
+            {/* Show last sent message */}
+            {lastSentMessage && (
+              <div className="alert alert-info" style={{ marginTop: '10px' }}>
+                Last sent message: {lastSentMessage.message}
+              </div>
+            )}
           </div>
         </div>
       </div>

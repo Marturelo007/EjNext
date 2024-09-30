@@ -14,6 +14,7 @@ const userImages = {
   "Tyrion Lannister": "/tyrion.jpg",
   "Daenerys Targaryen": "/daenerys.jpg",
   "Jon Snow": "/jon.jpg",
+  "admin" : "/user-icon.png"
 };
 
 const ChatCard = ({ id, onClick }) => {

@@ -54,10 +54,10 @@ export default function UsersRanking() {
 
     <Navigation/>
     <Users/>
-    {/* <button onClick={handlePing}>Ping all</button> */}
+    {/* <button onClick={handlePing}>Ping all</button> 
     <button onClick={()=> socket.emit('joinRoom',{room: "pepito"})}>Conectar unirse a la sala</button>^
     <input onChange={handleChangeInput}/>
-    <button onClick={handleSendMessage}>enviar mensaje</button>
+    <button onClick={handleSendMessage}>enviar mensaje</button>*/}
   </main>
 
   );
