@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faPaperPlane, faMicrophone, faPaperclip, faLaughBeam } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import styles from "/src/app/usersD/pepe.css";
+import { useUser } from './UserContext';
 
 const userImages = {
   "Drogon": "/drogon.jpg",
@@ -13,7 +14,7 @@ const userImages = {
   "Tyrion Lannister": "/tyrion.jpg",
   "Daenerys Targaryen": "/daenerys.jpg",
   "Jon Snow": "/jon.jpg",
-  "admin" : "/user-icon.png"
+  "admin": "/user-icon.png"
 };
 
 function formatTimestamp(timestamp) {
@@ -21,14 +22,14 @@ function formatTimestamp(timestamp) {
   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-function Users({ loggedInUserID }) {
+function Users() {
   const { socket, isConnected } = useSocket();
+  const { loggedInUserID } = useUser(); // Obtén loggedInUserID del contexto
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
   const [currentRoom, setCurrentRoom] = useState(null);
-  const [lastSentMessage, setLastSentMessage] = useState(null); // State to hold the last sent message
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -61,18 +62,17 @@ function Users({ loggedInUserID }) {
       socket.off('newMessage', handleNewMessage);
     };
   }, [socket]);
-
   function handleSendMessage() {
     if (message.trim() && currentRoom) {
-      const messageData = { message, room: currentRoom, timestamp: Date.now(), user: loggedInUserID };
-      console.log("Sending message:", messageData); // Log the message data to the console
-      socket.emit('sendMessage', messageData);
-      setMessages((prevMessages) => [...prevMessages, messageData]); // Update messages state to show immediately
-      setLastSentMessage(messageData); // Update last sent message
-      setMessage(""); // Clear the input after sending
+        const messageData = { message, room: currentRoom, timestamp: Date.now(), user: loggedInUserID };
+        socket.emit('sendMessage', messageData);
+        setMessages((prevMessages) => [...prevMessages, { message }]);
+        setMessage("");
     }
-  }
+}
 
+
+  
   function handleChangeInput(event) {
     setMessage(event.target.value);
   }
@@ -83,60 +83,53 @@ function Users({ loggedInUserID }) {
     setCurrentRoom(roomName);
     socket.emit('joinRoom', { room: roomName }, (response) => {
       if (response.success) {
-          console.log(`Successfully joined room: ${response.room}`);
+        console.log(`Successfully joined room: ${response.room}`);
       } else {
-          console.error(response.error);
+        console.error(response.error);
       }
-  });
-  
+    });
     setMessages([]); // Clear previous messages when switching rooms
   };
 
   return (
     <section style={styles.gradientCustom}>
-      <div className="container py-5">
+    <div className="container py-5">
         <div className="row">
-          <div className="col-md-6 col-lg-5 col-xl-5 mb-4 mb-md-0">
-            <h5 className="font-weight-bold mb-3 text-center text-white">Members</h5>
-            <div className="card mask-custom">
-              <div className="card-body">
-                <ul className="list-unstyled mb-0">
-                  {users.map((user, index) => (
-                    <ChatCard key={index} id={user.userName} onClick={handleClickContact} />
-                  ))}
-                </ul>
-                {error && <p className="text-danger">{error}</p>}
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-7 col-xl-7 d-flex flex-column" style={{ marginTop: '5%' }}>
-            <div className="flex-grow-1 overflow-auto">
-              <ul className="list-unstyled text-black">
-                {messages.map((msg, index) => (
-                  <li key={index} className="d-flex justify-content-start mb-4">
-                    <Image 
-                      src={userImages[msg.user] || userImages["Daenerys Targaryen"]} 
-                      alt="Avatar" 
-                      className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" 
-                      width="60" 
-                      height="60" 
-                    />
-                    <div className="card mask-custom">
-                      <div className="card-header d-flex justify-content-between p-3">
-                        <p className="text-black fw-bold mb-0">{msg.user}</p>
-                        <p className="text-dark small mb-0">
-                          <FontAwesomeIcon icon={faClock} /> {formatTimestamp(msg.timestamp)}
-                        </p>
-                      </div>
-                      <div className="card-body">
-                        <p className="mb-0">{msg.message}</p>
-                      </div>
+            <div className="col-md-6 col-lg-5 col-xl-5 mb-4 mb-md-0">
+                <h5 className="font-weight-bold mb-3 text-center text-white">Members</h5>
+                <div className="card mask-custom">
+                    <div className="card-body">
+                        <ul className="list-unstyled mb-0">
+                            {users.map((user) => (
+                                <ChatCard key={user.userName} id={user.userName} onClick={handleClickContact} />
+                            ))}
+                        </ul>
+                        {error && <p className="text-danger">{error}</p>}
                     </div>
-                  </li>
-                ))}
-              </ul>
+                </div>
             </div>
+
+            <div className="col-md-6 col-lg-7 col-xl-7 d-flex flex-column" style={{ marginTop: '5%' }}>
+                <div className="flex-grow-1 overflow-auto">
+                    <ul className="list-unstyled text-black">
+                        {messages.map((msg, index) => (
+                            <li key={index} className="d-flex justify-content-start mb-4">
+                                <Image 
+                                    src={userImages[loggedInUserID] || userImages["admin"]} 
+                                    alt="Avatar" 
+                                    className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" 
+                                    width="60" 
+                                    height="60" 
+                                />
+                                <div className="card mask-custom">
+                                    <div className="card-body">
+                                        <p className="mb-0">{msg.message}</p> {/* Solo mostrar el mensaje */}
+                                    </div>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
 
             <div className="mb-3 d-flex align-items-center" style={{ backgroundColor: '#e1e1e1', padding: '10px', borderRadius: '5px' }}>
               <FontAwesomeIcon icon={faPaperclip} />
@@ -161,14 +154,9 @@ function Users({ loggedInUserID }) {
               >
                 <FontAwesomeIcon icon={faPaperPlane} /> Send
               </button>
-            </div>
 
-            {/* Show last sent message */}
-            {lastSentMessage && (
-              <div className="alert alert-info" style={{ marginTop: '10px' }}>
-                Last sent message: {lastSentMessage.message}
-              </div>
-            )}
+              
+            </div>
           </div>
         </div>
       </div>

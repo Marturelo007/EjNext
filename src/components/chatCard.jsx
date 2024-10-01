@@ -14,16 +14,17 @@ const userImages = {
   "Tyrion Lannister": "/tyrion.jpg",
   "Daenerys Targaryen": "/daenerys.jpg",
   "Jon Snow": "/jon.jpg",
-  "admin" : "/user-icon.png"
+  "admin" : "/user-icon.png",
 };
 
 const ChatCard = ({ id, onClick }) => {
   return (
+
     <li className="p-2 border-bottom">
-      <a id={id} onClick={onClick} href="#!" className="d-flex justify-content-between link-light">
+      <a id={id} onClick={onClick} className="d-flex justify-content-between link-light">
         <div className="d-flex flex-row" id={id}>
           <Image 
-            src={userImages[id] || "/default-avatar.jpg"} // Fallback image
+            src={userImages[id] || "/default-avatar.jpg"}
             alt={`Avatar of ${id}`} 
             className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" 
             width="60" 
