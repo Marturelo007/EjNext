@@ -2,10 +2,7 @@
 import React from "react";
 import styles from "/src/app/usersD/pepe.css";
 import Image from "next/image";
-
-const cardStyle = {
-  borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
-};
+import PropTypes from 'prop-types';
 
 const userImages = {
   "Drogon": "/drogon.jpg",
@@ -14,17 +11,28 @@ const userImages = {
   "Tyrion Lannister": "/tyrion.jpg",
   "Daenerys Targaryen": "/daenerys.jpg",
   "Jon Snow": "/jon.jpg",
-  "admin" : "/user-icon.png",
+  "admin": "/user-icon.png",
 };
 
 const ChatCard = ({ id, onClick }) => {
   return (
-
     <li className="p-2 border-bottom">
-      <a id={id} onClick={onClick} className="d-flex justify-content-between link-light">
-        <div className="d-flex flex-row" id={id}>
+      <div
+        role="button"
+        tabIndex={0}
+        id={id}
+        onClick={onClick}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            onClick(e);
+          }
+        }}
+        className="d-flex justify-content-between link-light"
+        style={{ cursor: 'pointer' }} // Ensures the cursor shows as pointer
+      >
+        <div className="d-flex flex-row">
           <Image 
-            src={userImages[id] || "/default-avatar.jpg"}
+            src={userImages[id] || "/user-icon.png"}
             alt={`Avatar of ${id}`} 
             className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" 
             width="60" 
@@ -39,9 +47,14 @@ const ChatCard = ({ id, onClick }) => {
           <p className="small text-black mb-1">Just now</p>
           <span className="badge bg-danger float-end">1</span>
         </div>
-      </a>
+      </div>
     </li>
   );
+};
+
+ChatCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ChatCard;
