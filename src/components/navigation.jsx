@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from './UserContext';
+
 const userIcon = {
   padding: `2%`,
   borderRadius: `50%`,

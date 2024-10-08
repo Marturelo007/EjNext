@@ -24,7 +24,7 @@
 
   function Users() {
     const { socket } = useSocket();
-    const { loggedInUserID, loggedInUserName, setLoggedInUserID, setLoggedInUserName } = useUser();
+    const { loggedInUserName,setLoggedInUserName } = useUser();
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const [users, setUsers] = useState([]);
@@ -66,8 +66,7 @@
 
     useEffect(() => {
       console.log("Current loggedInUserName:", loggedInUserName);
-      console.log("Current loggedInUserID:", loggedInUserID);
-  }, [loggedInUserName, loggedInUserID]);
+  }, [loggedInUserName]);
 
 
     
@@ -84,11 +83,10 @@
 
         console.log("Login response:", data); // Check what you're getting here
 
-        if (response.ok && data.userID && data.userName) {
-            setLoggedInUserID(data.userID);
+        if (response.ok && data.userName) {
             setLoggedInUserName(data.userName);
             localStorage.setItem('userName', data.userName);
-            localStorage.setItem('userID', data.userID);
+
         } else {
             console.error("Invalid response data or unsuccessful login");
         }
@@ -102,15 +100,12 @@
 
 useEffect(() => {
   const storedUserName = localStorage.getItem('userName');
-  const storedUserID = localStorage.getItem('userID');
   console.log("Stored User Name:", storedUserName);
-  console.log("Stored User ID:", storedUserID);
 
-  if (storedUserName && storedUserID) {
+  if (storedUserName) {
       setLoggedInUserName(storedUserName);
-      setLoggedInUserID(storedUserID);
   }
-}, []);
+}, [setLoggedInUserName]);
 
 
 
@@ -120,12 +115,7 @@ useEffect(() => {
     
 
     async function handleSendMessage() {
-      // if (!loggedInUserID) {
-      //   console.error("User is not logged in, cannot send message.");
-      //   return; // Prevent sending if user is not logged in
-      // }
     
-      console.log("Logged In User ID:", loggedInUserID); // Debug line
       if (message.trim() && currentRoom) {
           const receptor = currentRoom.split('_')[1];
     
@@ -268,7 +258,7 @@ useEffect(() => {
     className="btn btn-primary"
     style={{ marginLeft: '8px' }}
     onClick={handleSendMessage}
-    disabled={!currentRoom} // Disable if user is not logged in
+    disabled={!currentRoom}
   >
     <FontAwesomeIcon icon={faPaperPlane} /> Send
   </button>

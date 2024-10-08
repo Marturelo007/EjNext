@@ -26,10 +26,8 @@ const InputComponent = () => {
             }
     
             setLoggedInUserName(data.userName); // This should update the context
-            setLoggedInUserID(data.userID); // Ensure this line is present
     
             console.log("Logged in user name set to:", data.userName);
-            console.log("Logged in user ID set to:", data.userID); // Debug line
     
             setIsLoggedIn(true);
             setSuccessMessage('Login successful!');
