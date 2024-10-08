@@ -19,15 +19,18 @@ const InputComponent = () => {
                 },
                 body: JSON.stringify({ userName, password }),
             });
-
+    
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.message);
             }
-
+    
             setLoggedInUserName(data.userName); // This should update the context
+            setLoggedInUserID(data.userID); // Ensure this line is present
+    
             console.log("Logged in user name set to:", data.userName);
-
+            console.log("Logged in user ID set to:", data.userID); // Debug line
+    
             setIsLoggedIn(true);
             setSuccessMessage('Login successful!');
             setErrorMessage('');
@@ -36,6 +39,7 @@ const InputComponent = () => {
             setSuccessMessage('');
         }
     };
+    
 
     return (
         <div>

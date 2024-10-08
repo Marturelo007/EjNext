@@ -3,6 +3,9 @@
   var bodyParser = require("body-parser"); //Convierte los JSON
   const MySQL = require("./modulos/mysql.js");
   const session = require('express-session');
+  const http = require('http');
+  const socketIo = require('socket.io');
+
 
   const app = express(); //Inicializo express
 
@@ -146,7 +149,7 @@ async function findChatID(user1, user2) {
   return result.length > 0 ? result[0].chatsID : null;  
 }
 
-// Modifica la ruta getChatID
+
 app.get('/getChatID', async (req, res) => {
   const { user1, user2 } = req.query;
 
@@ -281,7 +284,6 @@ app.get('/getUserById', async (req, res) => {
   app.post('/login', async (req, res) => {
     const { userName, password } = req.body;
 
-    // Check for missing parameters
     if (!userName || !password) {
         return res.status(400).json({ message: 'userName and password are required' });
     }
@@ -295,17 +297,15 @@ app.get('/getUserById', async (req, res) => {
 
         const user = results[0];
 
-        // Compare password
         if (user.password !== password) {
             return res.status(401).json({ message: 'Invalid password' });
         }
 
-        // Store userName on successful login
-        req.session.userName = user.userName; // Store userName in session
-
+        // Include userID in the response
         return res.json({
             message: 'Login successful!',
             userName: user.userName,
+            userID: user.userID, // Ensure this line is present
         });
     } catch (error) {
         console.error("Error during login:", error);

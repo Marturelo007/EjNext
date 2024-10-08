@@ -7,6 +7,7 @@ import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from './UserContext';
 const userIcon = {
   padding: `2%`,
+  borderRadius: `50%`,
 };
 
 const navbarStyle = {
@@ -17,6 +18,15 @@ const handleLogout = () => {
   localStorage.removeItem('loggedInUserID');
 };
 
+const userImages = {
+  "Drogon": "/drogon.jpg",
+  "Arya Stark": "/arya.webp",
+  "Sansa Stark": "/sansa.jpeg",
+  "Tyrion Lannister": "/tyrion.jpg",
+  "Daenerys Targaryen": "/daenerys.jpg",
+  "Jon Snow": "/jon.jpg",
+  "admin": "/user-icon.png"
+};
 
 function Navigation() {
   const { loggedInUserID, loggedInUserName, setLoggedInUserID, setLoggedInUserName } = useUser();
@@ -41,7 +51,7 @@ function Navigation() {
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" href="/usersD">
-                <Image src="/user-icon.png" width={50} height={50} style={userIcon} alt="Users" />
+                <Image src={userImages[loggedInUserName] || userImages["admin"]}  width={50} height={50} style={userIcon} alt="Users" />
                 {loggedInUserName}
               </Link>
             </li>

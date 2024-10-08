@@ -19,7 +19,7 @@
 
   function formatTimestamp(timestamp) {
     const date = new Date(timestamp);
-    return date.toISOString().slice(0, 19).replace('T', ' '); // Converts to 'YYYY-MM-DD HH:MM:SS'
+    return date.toISOString().slice(0, 19).replace('T', ' ');
   }
 
   function Users() {
@@ -53,15 +53,16 @@
       if (!socket) return;
 
       const handleNewMessage = (data) => {
-        setMessages((prevMessages) => [...prevMessages, { message: data.message }]);
+          setMessages((prevMessages) => [...prevMessages, { message: data.message }]);
       };
-
+  
       socket.on('newMessage', handleNewMessage);
+  
 
       return () => {
         socket.off('newMessage', handleNewMessage);
-      };
-    }, [socket]);
+    };
+}, [socket]);
 
     useEffect(() => {
       console.log("Current loggedInUserName:", loggedInUserName);
@@ -78,26 +79,42 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ userName, password })
         });
-    
-        if (response.ok) {
-            const data = await response.json();
-            console.log("Login response:", data); // Check the structure
-            if (data.userID && data.userName) {
-                setLoggedInUserID(data.userID);
-                setLoggedInUserName(data.userName);
-                console.log("Logged in user ID:", data.userID);
-            } else {
-                console.error("Login response is missing userID or userName");
-            }
+
+        const data = await response.json(); // Always parse the JSON response
+
+        console.log("Login response:", data); // Check what you're getting here
+
+        if (response.ok && data.userID && data.userName) {
+            setLoggedInUserID(data.userID);
+            setLoggedInUserName(data.userName);
+            localStorage.setItem('userName', data.userName);
+            localStorage.setItem('userID', data.userID);
         } else {
-            console.error("Login failed with status:", response.status);
+            console.error("Invalid response data or unsuccessful login");
         }
     } catch (error) {
         console.error("Error during login:", error);
     }
 };
 
-    
+
+
+
+useEffect(() => {
+  const storedUserName = localStorage.getItem('userName');
+  const storedUserID = localStorage.getItem('userID');
+  console.log("Stored User Name:", storedUserName);
+  console.log("Stored User ID:", storedUserID);
+
+  if (storedUserName && storedUserID) {
+      setLoggedInUserName(storedUserName);
+      setLoggedInUserID(storedUserID);
+  }
+}, []);
+
+
+
+
     
     
     
@@ -108,8 +125,9 @@
       //   return; // Prevent sending if user is not logged in
       // }
     
+      console.log("Logged In User ID:", loggedInUserID); // Debug line
       if (message.trim() && currentRoom) {
-        const receptor = currentRoom.split('_')[1]; // Adjust based on your room structure
+          const receptor = currentRoom.split('_')[1];
     
         if (!receptor) {
           console.error("Receptor is undefined");
@@ -117,7 +135,7 @@
         }
     
         try {
-          const response = await fetch(`http://localhost:4000/getChatID?user1=${loggedInUserID}&user2=${receptor}`);
+          const response = await fetch(`http://localhost:4000/getChatID?user1=${loggedInUserName}&user2=${receptor}`);
           if (!response.ok) {
             throw new Error("Failed to fetch chat ID");
           }
@@ -132,7 +150,7 @@
     
           const messageData = {
             time: formatTimestamp(Date.now()),
-            emisor: loggedInUserID,
+            emisor: loggedInUserName,
             receptor: receptor,
             content: message,
             chatsID: chatsID,
@@ -215,7 +233,7 @@
                   {messages.map((msg, index) => (
                     <li key={index} className="d-flex justify-content-start mb-4">
                       <Image 
-                        src={userImages[loggedInUserID] || userImages["admin"]} 
+                        src={userImages[loggedInUserName] || userImages["admin"]} 
                         alt="Avatar" 
                         className="rounded-circle d-flex align-self-center me-3 shadow-1-strong" 
                         width="60" 
