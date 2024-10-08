@@ -7,7 +7,7 @@ const InputComponent = () => {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // New state for login status
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,10 +17,7 @@ const InputComponent = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    userName, // using userName now
-                    password,
-                }),
+                body: JSON.stringify({ userName, password }),
             });
 
             const data = await response.json();
@@ -28,13 +25,13 @@ const InputComponent = () => {
                 throw new Error(data.message);
             }
 
-            console.log(data);
-            setLoggedInUserName(data.userName); // Set userName in context
-            setIsLoggedIn(true); // Set login status to true
+            setLoggedInUserName(data.userName); // This should update the context
+            console.log("Logged in user name set to:", data.userName);
+
+            setIsLoggedIn(true);
             setSuccessMessage('Login successful!');
             setErrorMessage('');
         } catch (error) {
-            console.error('Error during login:', error);
             setErrorMessage(error.message);
             setSuccessMessage('');
         }
@@ -53,6 +50,7 @@ const InputComponent = () => {
                             value={userName}
                             onChange={(e) => setUserName(e.target.value)}
                             required
+                            style= {{margin : "10px"}}
                         />
                     </div>
                     <div>
@@ -63,6 +61,7 @@ const InputComponent = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
+                            style= {{margin : "10px"}}
                         />
                     </div>
                     <button type="submit">Login</button>

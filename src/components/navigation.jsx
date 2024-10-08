@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-
+import { useUser } from './UserContext';
 const userIcon = {
   padding: `2%`,
 };
@@ -19,6 +19,7 @@ const handleLogout = () => {
 
 
 function Navigation() {
+  const { loggedInUserID, loggedInUserName, setLoggedInUserID, setLoggedInUserName } = useUser();
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary" style={navbarStyle}>
       <div className="container">
@@ -41,7 +42,7 @@ function Navigation() {
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" href="/usersD">
                 <Image src="/user-icon.png" width={50} height={50} style={userIcon} alt="Users" />
-                
+                {loggedInUserName}
               </Link>
             </li>
           </ul>

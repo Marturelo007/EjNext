@@ -6,7 +6,6 @@ import Button from "@/components/button";
 import { useState } from "react";
 import { useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Navigation from "@/components/navigation";
 export default function Home() {
 
