@@ -30,7 +30,8 @@
     const [users, setUsers] = useState([]);
     const [error, setError] = useState("");
     const [currentRoom, setCurrentRoom] = useState(null);
-
+    const searchParams = useSearchParams();
+    const userID = searchParams.get("userID");
     useEffect(() => {
       const fetchUsers = async () => {
         try {

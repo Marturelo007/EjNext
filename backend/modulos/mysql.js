@@ -4,8 +4,8 @@
  * Objeto con la configuración de la base de datos MySQL a utilizar.
  */
 const SQL_CONFIGURATION_DATA = {
-  //host: "10.1.5.205", // IP privada del servidor del colegio
-  host: "181.47.29.35", // IP pública del servidor
+  host: "10.1.5.205", // IP privada del servidor del colegio
+  //host: "181.47.29.35", // IP pública del servidor
   user: "2024-5AINF-G09",
   password: "elchavo",
   database: "2024-5AINF-G09",

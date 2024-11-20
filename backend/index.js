@@ -35,7 +35,7 @@ const server = app.listen(LISTEN_PORT, () => {
 const io = require("socket.io")(server, {
   cors: {
     // IMPORTANTE: REVISAR PUERTO DEL FRONTEND
-    origin: ["http://localhost:3000", "http://localhost:3001"],
+    origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"],
     methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
     credentials: true, // Habilitar el envío de cookies
   },
