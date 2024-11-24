@@ -1,10 +1,10 @@
-var express = require("express"); //Tipo de servidor: Express
+var express = require("express");
 var cors = require("cors");
-var bodyParser = require("body-parser"); //Convierte los JSON
+var bodyParser = require("body-parser");
 const MySQL = require("./modulos/mysql.js");
 const session = require("express-session");
 const http = require("http");
-const socketIo = require("socket.io");
+const socketIo = require("socket.io");  
 
 const app = express(); //Inicializo express
 
@@ -12,6 +12,15 @@ const app = express(); //Inicializo express
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
+
+
+// Configuración detallada de CORS
+const corsOptions = {
+  origin: ["http://localhost:3000"], // Orígenes permitidos
+  methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
+  credentials: true, // Habilitar envío de cookies/credenciales
+};
+app.use(cors(corsOptions));
 
 const LISTEN_PORT = 4000; // Puerto por el que estoy ejecutando la página Web
 
@@ -66,11 +75,51 @@ app.get("/", function (req, res) {
  */
 
 app.get("/getUsers", async function (req, res) {
-  console.log(req.query); //Los pedidos get reciben los datos del req.query
-  const respuesta = await MySQL.realizarQuery("SELECT * FROM users");
-  console.log({ respuesta });
-  res.send(respuesta);
+  try {
+    const respuesta = await MySQL.realizarQuery("SELECT * FROM users");
+    console.log("Usuarios obtenidos de la base de datos:", respuesta); // Diagnóstico
+    res.json(respuesta);
+  } catch (error) {
+    console.error("Error en /getUsers:", error);
+    res.status(500).send("Error interno del servidor");
+  }
 });
+
+app.post("/validateUser", async function (req, res) {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({ message: "Faltan datos de usuario o contraseña" });
+  }
+
+  try {
+    const result = await MySQL.realizarQuery(
+      "SELECT * FROM users WHERE username = ?",
+      [username.trim().toLowerCase()]
+    );
+
+    if (result.length === 0) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    const user = result[0];
+    if (user.password !== password) {
+      return res.status(401).json({ message: "Contraseña incorrecta" });
+    }
+
+    res.json({
+      message: "Inicio de sesión exitoso",
+      userID: user.id, // Aquí confirmamos que `user.id` se devuelve correctamente
+      username: user.username,
+    });
+  } catch (error) {
+    console.error("Error al validar el usuario:", error);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
+});
+
+
+  
 
 app.post("/insertUsers", async function (req, res) {
   console.log(req.body);
@@ -291,38 +340,35 @@ app.post("/login", async (req, res) => {
   const { userName, password } = req.body;
 
   if (!userName || !password) {
-    return res
-      .status(400)
-      .json({ message: "userName and password are required" });
+    return res.status(400).json({ message: "userName and password are required" });
   }
 
   try {
-    const results = await realizarQuery(
+    const results = await MySQL.realizarQuery(
       "SELECT * FROM users WHERE userName = ?",
-      [userName]
+      [userName.trim()]
     );
 
     if (results.length === 0) {
-      return res.status(401).json({ message: "No user found" });
+      return res.status(401).json({ message: "Usuario no encontrado" });
     }
 
     const user = results[0];
-
     if (user.password !== password) {
-      return res.status(401).json({ message: "Invalid password" });
+      return res.status(401).json({ message: "Contraseña incorrecta" });
     }
 
-    // Include userID in the response
-    return res.json({
-      message: "Login successful!",
-      userName: user.userName,
-      userID: user.userID, // Ensure this line is present
+    res.json({
+      message: "Inicio de sesión exitoso",
+      userName: user.userName, // Devuelve el userName
+      userID: user.id,         // Devuelve el userID
     });
   } catch (error) {
-    console.error("Error during login:", error);
-    return res.status(500).json({ message: "Internal server error" });
+    console.error("Error durante el login:", error);
+    res.status(500).json({ message: "Error interno del servidor" });
   }
 });
+
 
 app.get("/getUsersName", async (req, res) => {
   try {
