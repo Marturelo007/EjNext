@@ -50,7 +50,7 @@ function Users() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:4000/getUsersName");
+        const response = await fetch("http://localhost:3001/getUsersName");
         if (!response.ok) {
           throw new Error("Failed to fetch users");
         }
@@ -83,12 +83,13 @@ function Users() {
   // Cargar el nombre del usuario logueado desde el LocalStorage
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
-    console.log("Stored User Name:", storedUserName);
-
     if (storedUserName) {
       setLoggedInUserName(storedUserName);
+    } else {
+      console.error("No se encontró loggedInUserName en localStorage");
     }
   }, [setLoggedInUserName]);
+  
 
   // Enviar un mensaje
   async function handleSendMessage() {
@@ -102,7 +103,7 @@ function Users() {
 
       try {
         const response = await fetch(
-          `http://localhost:4000/getChatID?user1=${loggedInUserName}&user2=${receptor}`
+          `http://localhost:3001/getChatID?user1=${loggedInUserName}&user2=${receptor}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch chat ID");
@@ -127,7 +128,7 @@ function Users() {
         setMessages((prevMessages) => [...prevMessages, { message }]);
         setMessage("");
 
-        const sendResponse = await fetch("http://localhost:4000/insertMensajes", {
+        const sendResponse = await fetch("http://localhost:3001/insertMensajes", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

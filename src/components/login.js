@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/button";
 import React, { useState, useEffect } from "react";
-import { getUsers, fetchRegister, insertCard } from "@/functions/fetch.js";
+import { fetchLogin, getUsers, fetchRegister, insertCard } from "@/functions/fetch.js";
 import Input from "@/components/input"; // Importamos el componente Input
 import styles from "@/app/page.module.css"; // Estilos para el formulario
 
@@ -14,43 +14,31 @@ export default function Home() {
   const [isLogin, setIsLogin] = useState(true);
 
   // Manejo de Login
-  const handleLogin = async (userName, password) => {
+  // Manejo de Login
+  const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:4000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userName, password }),
-      });
-  
-      if (!response.ok) {
-        const errorData = await response.json();
-        alert(errorData.message);
-        return;
-      }
-  
-      const data = await response.json();
+      const data = await fetchLogin({ username, password }); // Reutilizamos fetchLogin
+
       console.log("Respuesta del login:", data);
-  
-      localStorage.setItem("userName", data.userName);
+
+      // Guardar userID y username en localStorage
       localStorage.setItem("userID", data.userID);
-  
-      setLoggedInUserName(data.userName);
-  
+      localStorage.setItem("userName", data.userName);
+
+      // Redirigir a la página de usuarios
       window.location.href = `/usersD?userID=${encodeURIComponent(data.userID)}`;
     } catch (error) {
-      console.error("Error durante el login:", error);
-      alert("Error al intentar iniciar sesión.");
+      console.error("Error durante el login:", error.message);
+      alert(error.message || "Error al intentar iniciar sesión.");
     }
   };
-  
-  
+
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
     const storedUserID = localStorage.getItem("userID");
-  
+
     if (storedUserName && storedUserID) {
       console.log("Datos del usuario desde localStorage:", { storedUserName, storedUserID });
-      setLoggedInUserName(storedUserName);
     } else {
       console.error("Datos del usuario no encontrados en localStorage");
     }

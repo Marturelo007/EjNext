@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 
+
 // Configuración detallada de CORS
 const corsOptions = {
   origin: ["http://localhost:3000"], // Orígenes permitidos
@@ -22,23 +23,24 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-const LISTEN_PORT = 4000; // Puerto por el que estoy ejecutando la página Web
+const LISTEN_PORT = 3001;								// Puerto por el que estoy ejecutando la página Web
 
 const server = app.listen(LISTEN_PORT, () => {
   console.log(`Server running in http://localhost:${LISTEN_PORT}`);
   console.log("Defined routes:");
-  console.log("   [GET] http://localhost:4000/getUsers");
-  console.log("   [POST] http://localhost:4000/insertUsers");
-  console.log("   [PUT] http://localhost:4000/putUsers");
-  console.log("   [DELETE] http://localhost:4000/deleteUsers");
-  console.log("   [GET] http://localhost:4000/getChats");
-  console.log("   [POST] http://localhost:4000/insertChats");
-  console.log("   [PUT] http://localhost:4000/putChats");
-  console.log("   [DELETE] http://localhost:4000/deleteChats");
-  console.log("   [GET] http://localhost:4000/getMensajes");
-  console.log("   [POST] http://localhost:4000/insertMensajes");
-  console.log("   [PUT] http://localhost:4000/putMensajes");
-  console.log("   [DELETE] http://localhost:4000/deleteMensajes");
+  console.log(`   [GET] http://localhost:${LISTEN_PORT}/getUsers`);
+  console.log(`   [POST] http://localhost:${LISTEN_PORT}/insertUsers`);
+  console.log(`   [PUT] http://localhost:${LISTEN_PORT}/putUsers`);
+  console.log(`   [DELETE] http://localhost:${LISTEN_PORT}/deleteUsers`);
+  console.log(`   [GET] http://localhost:${LISTEN_PORT}/getChats`);
+  console.log(`   [POST] http://localhost:${LISTEN_PORT}/insertChats`);
+  console.log(`   [PUT] http://localhost:${LISTEN_PORT}/putChats`);
+  console.log(`   [DELETE] http://localhost:${LISTEN_PORT}/deleteChats`);
+  console.log(`   [GET] http://localhost:${LISTEN_PORT}/getMensajes`);
+  console.log(`   [POST] http://localhost:${LISTEN_PORT}/insertMensajes`);
+  console.log(`   [PUT] http://localhost:${LISTEN_PORT}/putMensajes`);
+  console.log(`   [DELETE] http://localhost:${LISTEN_PORT}/deleteMensajes`);
+  console.log(`   [DELETE] http://localhost:${LISTEN_PORT}/login`);
 });
 
 const io = require("socket.io")(server, {

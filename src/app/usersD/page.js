@@ -6,8 +6,15 @@ import Users from "@/components/Users";
 import { UserProvider } from "@/components/UserContext";
 
 export default function UsersRanking() {
-  const [userID, setUserID] = useState(null);
-  const searchParams = useSearchParams(); // Usar correctamente el hook
+  const searchParams = useSearchParams();
+  const userIDFromParams = searchParams?.get("userID");
+  const userID = userIDFromParams || localStorage.getItem("userID");
+
+  if (!userID) {
+    console.error("userID no encontrado en la URL ni en localStorage");
+    alert("Debes iniciar sesión primero.");
+    window.location.href = "/";
+  }
 
   useEffect(() => {
     const idFromParams = searchParams?.get("userID"); // Obtener el userID de la URL
